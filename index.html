@@ -120,7 +120,7 @@
         font-size: clamp(18px, 2.4vw, 28px);
       }
       .contact {
-        /* center the contact area on the page and match projects width */
+        /* center the contact area on the page and match .projects width */
         margin: 75px auto 0;
         max-width: 1200px; /* same cap as .projects */
         padding: 0 16px;
@@ -135,8 +135,7 @@
       .contact > .projects-grid {
         display: grid;
         gap: 20px;
-        /* use fixed column sizing to avoid the inner grid stretching full width,
-           and center the two columns inside the capped contact area */
+        /* two columns by default, centered and capped to visually match projects */
         grid-template-columns: repeat(2, minmax(240px, 1fr));
         align-items: start;
         justify-items: center;
@@ -144,6 +143,32 @@
         width: 100%;
         max-width: 720px; /* keeps the two cards visually centered and grouped */
         margin: 0 auto;
+      }
+
+      /* stack contact cards on narrow viewports while keeping center alignment */
+      @media (max-width: 720px) {
+        .contact {
+          padding: 0 12px;
+        }
+        .contact > .projects-grid {
+          grid-template-columns: 1fr;
+          max-width: 520px; /* still centered and matches other content widths on small screens */
+          gap: 16px;
+          margin: 0 auto;
+        }
+        .contactCard {
+          max-width: 100%;
+        }
+      }
+
+      /* pointer behavior: don't show pointer for the whole contact card — only for links */
+      .contactCard {
+        cursor: default; /* ensure no pointer on the card itself */
+      }
+      .contact a,
+      .contact a:link,
+      .contact a:visited {
+        cursor: pointer; /* show pointer only when over actual links */
       }
 
       /* Hover media container */
