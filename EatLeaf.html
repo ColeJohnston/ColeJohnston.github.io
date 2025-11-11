@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PermanentMarker:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="Assets/icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+<link rel="stylesheet" href="GamePages.css" />
+  </head>
+  <body>
+        <nav class="nav container">
+
+      <button class="home-button" onclick="location.href='MainPage.html'">
+        <i class="fa-solid fa-house"></i>
+      </button>
+    <!--main video-->
+    <main>
+      <div class="projects-main-container">
+        <h2 class="video-title">Eat Leaf</h2>
+        <video
+          id="main-video"
+          loop
+          autoplay
+          muted
+          src="EatLeafPreview.mp4"
+          type="video/mp4"
+        ></video>
+        <br />
+        <div class="video-description-grid">
+          <div class="game-card">
+            <h2>Description</h2>
+            <p>
+              Eat Leaf is a relaxing game where you play as a cute caterpillar
+              eating leaves while avoiding spikes and pitfalls. Explore a dark environment with
+              only a small flashlight to light your path.
+            </p>
+          </div>
+          <div class="game-card">
+            <h2>Project Info</h2>
+            <p>
+              <i class="fa-solid fa-user"></i>
+              <strong>Role:</strong> Solo Developer<br />
+              <i class="fa-solid fa-gear"></i> <strong>Engine:</strong> Godot<br />
+              <i class="fa-solid fa-calendar"></i>
+              <strong>Date:</strong> February-March 2024<br />
+              <i class="fa-solid fa-note-sticky"></i><strong> Notes:</strong> Taught myself Godot <i class="fa-solid fa-note-sticky spacer"></i>and GDScript to create this <br><i class="fa-solid fa-note-sticky spacer"></i>game. <br> 
+              <i class="fa-solid fa-gamepad"></i> Play in browser
+            </p>
+          </div>
+        </div>
+        <div class="playButton">
+          <a href="https://oneafter68.itch.io/eat-leaf" target="_blank">
+            <button type="submit">Play Now!</button>
+          </a>
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script src="script.js"></script>
+
+  <!--Footer-->
+</html>
