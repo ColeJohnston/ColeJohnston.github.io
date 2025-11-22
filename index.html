@@ -39,7 +39,7 @@
     html,
     body {
       height: 100%;
-      scroll-padding-top: 100px;
+      scroll-padding-top: 200px;
     }
 
     body {
@@ -180,7 +180,7 @@
       display: grid;
       gap: 20px;
       /* two columns by default, centered and capped to visually match projects */
-      grid-template-columns: repeat(2, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, minmax(480px, 1fr));
       align-items: start;
       justify-items: center;
       justify-content: center;
@@ -270,8 +270,8 @@
       line-height: 1.4;
       height: auto;
       margin: 12px 0;
+      margin-bottom: 4em;
       color: var(--muted);
-      /* allow the paragraph to expand naturally so the CTA won't overlap */
       white-space: normal;
       word-break: break-word;
       flex: 0 0 auto;
@@ -288,6 +288,8 @@
       font-weight: 600;
       margin-top: 12px;
       align-self: center;
+      position: absolute;
+      bottom:20px;
       /* keep the button below the paragraph and centered */
     }
 
@@ -324,7 +326,7 @@
     .intro {
       transform: translateY(100px);
       margin: auto;
-      margin-bottom: 200px;
+      margin-bottom: 250px;
       justify-self: center;
       justify-content: center;
       text-align: center;
@@ -349,6 +351,7 @@
       max-width: 1200px;
       /* matches .projects max-width */
       margin: 24px auto;
+      margin-bottom: 300px;
       padding: 0 16px;
       box-sizing: border-box;
     }
@@ -456,14 +459,16 @@
     .site-header {
       border-bottom: 1px solid rgba(255, 255, 255, 0.02);
       background-color: transparent;
-      backdrop-filter: blur(10px);
       position: fixed;
       /* remain visible after scroll */
+      backdrop-filter: blur(10px);
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 8000;
       overflow: visible;
+      --site-header-height: 100px;
+      padding-bottom: 100px;
     }
 
     .nav {
@@ -472,7 +477,8 @@
       justify-content: center;
       padding: 1rem 0;
       z-index: 1000;
-      position: relative;
+      position: fixed;
+      left: 100px;
       /* allow absolutely-positioned hamburger inside and keep links centered */
     }
 
@@ -513,7 +519,6 @@
       border: 1px solid rgba(255, 255, 255, 0.02);
       background-color: transparent;
       backdrop-filter: blur(10px);
-      position: fixed;
       /* keep the panel visible in the same place while scrolling */
       top: 100px;
       /* same vertical offset as before */
@@ -557,53 +562,114 @@
     .intro p strong {
       color: #71bcd3;
     }
+
+    
+
+
+
+
+    .topnav {
+            position: fixed;
+            z-index: 2000;
+  overflow: hidden;
+  right:100px;
+        display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+      z-index: 1000;
+      position: fixed;
+}
+
+.topnav a{
+  float: left;
+  display: block;
+  color: #e7e7e7;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav.icon {
+  color: #e7e7e7;
+  font-size: 50px;
+  display: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .topnav a {display: none;}
+  .topnav.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .topnav.responsive{
+    position: fixed;
+    top: calc(var(--site-header-height,1000px));
+    left: 0;
+    width: 100%;
+    display: block;
+    z-index: 999; /* below header but above page content */
+    background: rgba(10,10,12,0.95); /* optional theme-matching bg */
+    box-sizing: border-box;
+    padding: 8px 12px;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+    }
   </style>
 </head>
 
 <body>
   <header class="site-header">
-    <span>
-    </span>
     <nav class="nav">
-      <button class="hamburger" id="hamburgerBtn" style="justify-self:left">☰</button>
       <ul class="nav-links">
         </li>
         <li>
           <a class="link" href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn">
             <i class="fa-brands fa-linkedin my-icons"></i>
-          </a>
-        </li>
+            </a>
+            </li>
+            
+            <li>
+              <a class="link" href="https://github.com/ColeJohnston" target="_blank" title="GitHub">
+                <i class="fa-brands fa-github my-icons"></i>
+                </a>
+                </li>
 
-        <li>
-          <a class="link" href="https://github.com/ColeJohnston" target="_blank" title="GitHub">
-            <i class="fa-brands fa-github my-icons"></i>
-          </a>
-        </li>
-
-        <li>
+                <li>
           <a class="link" href="https://oneafter68.itch.io" target="_blank" title="Itch.io">
             <i class="fa-brands fa-itch-io my-icons"></i>
           </a>
         </li>
-      </ul>
-    </nav>
-  </header>
-  <div class="navSide" id="navSide">
-    <a href="#intro" id="navSide intro" class="navSideIntro">About Me</a>
-    <a href="#projects" id="navSide projects">Projects</a>
-    <a href="#skills" id="navSide skills">Skills</a>
-    <a href="#contact" id="navSide contact">Contact</a>
-  </div>
-  <div class="intro" id="intro">
-    <h1>Cole Johnston</h1>
-    <h2>Gameplay and Physics Programmer</h2>
-    <p>
-      I am a <strong>video game programmer</strong> with a specialty in
-      <strong>gameplay</strong> and <strong>physics</strong> systems. I love
-      solving complex problems and building solid foundations that can be
-      built on by myself and others. Before studying in video game
-      programming, I graduated with a <strong>physics degree</strong>. This
-      taught me to see the world through a different lens and helped shape the
+        </ul>
+        <a href="javascript:void(0);" class="topnav icon" id="topnavIcon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+    </a>
+        <div class="topnav" id="myTopnav">
+          <a href="#intro" id="navSide intro" class="navSideIntro">About Me</a>
+          <a href="#projects" id="navSide projects">Projects</a>
+          <a href="#skills" id="navSide skills">Skills</a>
+          <a href="#contact" id="navSide contact">Contact</a>
+        </div>
+        </nav>
+        </header>
+        <div class="intro" id="intro">
+          <h1>Cole Johnston</h1>
+          <h2>Gameplay and Physics Programmer</h2>
+          <p>
+            I am a <strong>video game programmer</strong> with a specialty in
+            <strong>gameplay</strong> and <strong>physics</strong> systems. I love
+            solving complex problems and building solid foundations that can be
+            built on by myself and others. Before studying in video game
+            programming, I graduated with a <strong>physics degree</strong>. This
+            taught me to see the world through a different lens and helped shape the
       way I approach development and problem solving.
     </p>
     <p>
@@ -613,7 +679,7 @@
       skills.
     </p>
     </div>
-    <h1 id="projects" class="page-title" style="color: #bbbbbb">Projects:</h1>
+    <h1 id="projects" class="page-title" style="color: #e7e7e7">Projects:</h1>
 
     <div class="projects-grid">
       <div class="topRow">
@@ -756,7 +822,7 @@
       <div class="skill-pill">GitHub</div>
     </div>
   </div>
-  <div id="contact" class="contact">
+  <div id="contact" class="contact" style="padding-bottom: 150px;">
     <h1 style="text-decoration: underline">Contact Me!</h1>
     <div class="projects-grid">
       <article class="contactCard project-card reveal" style="
@@ -785,6 +851,19 @@
           <p>
             <a class="link" href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn"
               style="color: rgb(149, 225, 255)">LinkedIn</a>
+          </p>
+        </div>
+      </article>
+            <article class="contactCard project-card reveal" style="
+            border: 5px solid rgb(0, 183, 255);
+            box-shadow: 0 6px 25px rgb(0, 183, 255);
+          ">
+        <div class="card-body">
+          <h3 class="email" style="color: white">
+            <i class="fa-solid fa-sheet-plastic"></i> Resume
+          </h3>
+          <p>
+            <a style="color: rgb(149, 225, 255)" href="CV.pdf" download>Download pdf</a>
           </p>
         </div>
       </article>
@@ -941,6 +1020,16 @@
   });
 
   </script>
+  <script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav" || x.className === "topnavIcon") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 </body>
 
 </html>
