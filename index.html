@@ -1,1035 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+      <title>Projects</title>
+      <style>
+         body::before {
+         content: "";
+         position: fixed;
+         inset: 0;
+         pointer-events: none;
+         z-index: -1;
+         background:
+         radial-gradient(circle at 20% 20%, rgba(75, 120, 255, 0.18), transparent 60%),
+         radial-gradient(circle at 80% 80%, rgba(180, 80, 255, 0.18), transparent 60%),
+         radial-gradient(circle at 70% 20%, rgba(80, 255, 220, 0.15), transparent 60%);
+         mix-blend-mode: screen;
+         filter: blur(40px);
+         }
+         :root {
+         --bg: #1b1b1b;
+         --card-bg: #1c1f2b;
+         --accent1: rgb(0, 183, 255);
+         --accent2: rgb(90, 0, 102);
+         --muted: #e7e7e7;
+         --card-radius: 10px;
+         }
+         /* Global */
+         * {
+         box-sizing: border-box;
+         }
+         html,
+         body {
+         height: 100%;
+         scroll-padding-top: 200px;
+         }
+         body {
+         margin: 0;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+         "Helvetica Neue", Arial;
+         background:
+         repeating-linear-gradient(135deg,
+         rgba(90, 150, 255, 0.08) 0px,
+         rgba(90, 150, 255, 0.08) 2px,
+         rgba(200, 80, 255, 0.08) 2px,
+         rgba(200, 80, 255, 0.08) 4px),
+         #0a0b0d;
+         color: var(--muted);
+         -webkit-font-smoothing: antialiased;
+         -moz-osx-font-smoothing: grayscale;
+         }
+         .projects {
+         max-width: 1200px;
+         margin: 32px auto;
+         padding: 16px;
+         margin-top: 10px;
+         }
+         h1.page-title {
+         text-align: center;
+         text-decoration: underline;
+         font-size: clamp(28px, 4.5vw, 50px);
+         margin: 100px 0 30px;
+         }
+         /* Responsive grid */
+         .projects-grid {
+         justify-content: center;
+         justify-items: center;
+         margin: 30px;
+         /* display: grid;
+         gap: 20px;
+         grid-template-columns: repeat(3, minmax(260px, 1fr));
+         align-items: start;
+         justify-items: center; */
+         }
+         .topRow {
+         display: flex;
+         gap: 5vw;
+         grid-template-columns: repeat(3, minmax(100px, 1fr));
+         justify-items: center;
+         align-items: stretch;
+         }
+         .bottomRow {
+         margin-top: 5vw;
+         display: flex;
+         gap: 5vw;
+         grid-template-columns: repeat(2, minmax(100px, 1fr));
+         justify-content: center;
+         justify-items: center;
+         align-items: stretch;
+         margin-bottom: 150px;
+         }
+         /* Card */
+         .card {
+         display: flex;
+         flex-direction: column;
+         align-items: stretch;
+         width: 100%;
+         max-width: 400px;
+         background: var(--card-bg);
+         /* allow the card to grow to fit its content instead of forcing a fixed height */
+         height: 100%;
+         min-height: 0;
+         border-radius: var(--card-radius);
+         padding: 1rem;
+         position: relative;
+         text-align: center;
+         transition: transform 0.2s ease, box-shadow 0.2s ease;
+         overflow: visible;
+         cursor: pointer;
+         }
+         .scale {
+         transition: 0.6s ease;
+         }
+         .scale:hover {
+         transform: translateY(-6px) scale(1.02);
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+         }
+         .card a.card-link {
+         color: inherit;
+         text-decoration: none;
+         /* keep content stacked vertically, but don't force link to stretch and cause overlap */
+         display: flex;
+         flex-direction: column;
+         gap: 0.5rem;
+         align-items: stretch;
+         }
+         .card h2 {
+         margin: 8px 0;
+         font-size: clamp(18px, 2.4vw, 28px);
+         }
+         .contactBottom{
+           justify-content: center;
+           text-align: center;
+          }
+          .contact-grid{
+           display: flex;
+          justify-content: center;
+          gap: 4vw;
+          margin: 4vw;
+         }
+         /* stack contact cards on narrow viewports while keeping center alignment */
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <title>Projects</title>
-  <style>
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(75, 120, 255, 0.18), transparent 60%),
-        radial-gradient(circle at 80% 80%, rgba(180, 80, 255, 0.18), transparent 60%),
-        radial-gradient(circle at 70% 20%, rgba(80, 255, 220, 0.15), transparent 60%);
-      mix-blend-mode: screen;
-      filter: blur(40px);
-    }
-
-    :root {
-      --bg: #1b1b1b;
-      --card-bg: #1c1f2b;
-      --accent1: rgb(0, 183, 255);
-      --accent2: rgb(90, 0, 102);
-      --muted: #e7e7e7;
-      --card-radius: 10px;
-    }
-
-
-    /* Global */
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-      scroll-padding-top: 200px;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial;
-      background:
-        repeating-linear-gradient(135deg,
-          rgba(90, 150, 255, 0.08) 0px,
-          rgba(90, 150, 255, 0.08) 2px,
-          rgba(200, 80, 255, 0.08) 2px,
-          rgba(200, 80, 255, 0.08) 4px),
-        #0a0b0d;
-      color: var(--muted);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .projects {
-      max-width: 1200px;
-      margin: 32px auto;
-      padding: 16px;
-      margin-top: 10px;
-    }
-
-    h1.page-title {
-      text-align: center;
-      text-decoration: underline;
-      font-size: clamp(28px, 4.5vw, 50px);
-      margin: 100px 0 30px;
-    }
-
-    /* Responsive grid */
-    .projects-grid {
-      justify-content: center;
-      justify-items: center;
-      margin: 30px;
-      /* display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(3, minmax(260px, 1fr));
-        align-items: start;
-        justify-items: center; */
-    }
-
-    .topRow {
-      display: flex;
-      gap: 5vw;
-      grid-template-columns: repeat(3, minmax(100px, 1fr));
-      justify-items: center;
-      align-items: stretch;
-    }
-
-    .bottomRow {
-      margin-top: 5vw;
-      display: flex;
-      gap: 5vw;
-      grid-template-columns: repeat(2, minmax(100px, 1fr));
-      justify-content: center;
-      justify-items: center;
-      align-items: stretch;
-      margin-bottom: 150px;
-    }
-
-    /* Card */
-    .card {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      width: 100%;
-      max-width: 400px;
-      background: var(--card-bg);
-      /* allow the card to grow to fit its content instead of forcing a fixed height */
-      height: 100%;
-      min-height: 0;
-      border-radius: var(--card-radius);
-      padding: 1rem;
-      position: relative;
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      overflow: visible;
-      cursor: pointer;
-    }
-
-    .contactCard {
-      width: 100%;
-      max-width: 400px;
-      padding: 1rem;
-      position: relative;
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      overflow: visible;
-      cursor: pointer;
-      background: var(--card-bg);
-      color: var(--muted);
-      border-radius: 10px;
-      margin-bottom: 100px;
-    }
-
-    .scale {
-      transition: 0.6s ease;
-    }
-
-    .scale:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .card a.card-link {
-      color: inherit;
-      text-decoration: none;
-      /* keep content stacked vertically, but don't force link to stretch and cause overlap */
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: stretch;
-    }
-
-    .card h2 {
-      margin: 8px 0;
-      font-size: clamp(18px, 2.4vw, 28px);
-    }
-
-    .contact {
-      /* center the contact area on the page and match .projects width */
-      margin: 75px auto 0;
-      max-width: 1200px;
-      /* same cap as .projects */
-      padding: 0 16px;
-      box-sizing: border-box;
-      display: grid;
-      gap: 20px;
-      align-items: start;
-      justify-items: center;
-    }
-
-    /* If .contact wraps a projects-grid, ensure that inner grid follows same spacing/centering */
-    .contact>.projects-grid {
-      display: grid;
-      gap: 20px;
-      /* two columns by default, centered and capped to visually match projects */
-      grid-template-columns: repeat(3, minmax(480px, 1fr));
-      align-items: start;
-      justify-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 720px;
-      /* keeps the two cards visually centered and grouped */
-      margin: 0 auto;
-    }
-
-    /* stack contact cards on narrow viewports while keeping center alignment */
-    @media (max-width: 720px) {
-      .contact {
-        padding: 0 12px;
-      }
-
-      .contact>.projects-grid {
-        grid-template-columns: 1fr;
-        max-width: 520px;
-        /* still centered and matches other content widths on small screens */
-        gap: 16px;
-        margin: 0 auto;
-      }
-
-      .contactCard {
-        max-width: 100%;
-      }
-    }
-
-    /* pointer behavior: don't show pointer for the whole contact card — only for links */
-    .contactCard {
-      cursor: default;
-      /* ensure no pointer on the card itself */
-    }
-
-    .contact a,
-    .contact a:link,
-    .contact a:visited {
-      cursor: pointer;
-      /* show pointer only when over actual links */
-    }
-
-    /* Hover media container */
-    .hover {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: calc(var(--card-radius) - 2px);
-      overflow: hidden;
-      display: block;
-      background: linear-gradient(180deg, #111, #222);
-    }
-
-    .hover img,
-    .hover video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hover img {
-      transition: opacity 0.45s ease;
-    }
-
-    .hover video {
-      opacity: 0;
-      transition: opacity 0.45s ease;
-      pointer-events: none;
-    }
-
-    /* make the whole card trigger the media swap/play */
-    .card:hover .hover img,
-    .card:focus-within .hover img {
-      opacity: 0;
-    }
-
-    .card:hover .hover video,
-    .card:focus-within .hover video {
-      opacity: 1;
-    }
-
-    /* Text */
-    .card p {
-      font-size: clamp(12px, 1.8vw, 14px);
-      line-height: 1.4;
-      height: auto;
-      margin: 12px 0;
-      margin-bottom: 4em;
-      color: var(--muted);
-      white-space: normal;
-      word-break: break-word;
-      flex: 0 0 auto;
-    }
-
-    /* Call to action styled as button */
-    .cta {
-      display: inline-block;
-      background: var(--accent1);
-      color: #000;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 12px;
-      align-self: center;
-      position: absolute;
-      bottom:20px;
-      /* keep the button below the paragraph and centered */
-    }
-
-    .cta:active {
-      transform: translateY(1px);
-    }
-
-    /* Neon border effect (background blur) */
-    .card::before,
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: -6px;
-      border-radius: calc(var(--card-radius) + 6px);
-      z-index: -1;
-      background-image: conic-gradient(from var(--angle),
-          var(--accent1),
-          var(--accent2),
-          var(--accent1));
-      padding: 3px;
-      transform: translateZ(0);
-      animation: spin 1s linear infinite;
-    }
-
-    .card::before {
-      filter: blur(40px);
-      opacity: 0.5;
-    }
-
-    .card::after {
-      mix-blend-mode: screen;
-    }
-
-    .intro {
-      transform: translateY(100px);
-      margin: auto;
-      margin-bottom: 250px;
-      justify-self: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 25px;
-    }
-
-    .intro h1 {
-      color: rgb(149, 225, 255);
-    }
-
-    .intro h2 {
-      margin: -10px 0 20px 0;
-    }
-
-    .skills {
-      /* replaced with a responsive "skills row" design */
-      /* wrapper uses the same max width as .projects so it spans/caps the same length */
-    }
-
-    .skills-wrapper {
-      width: 100%;
-      max-width: 1200px;
-      /* matches .projects max-width */
-      margin: 24px auto;
-      margin-bottom: 300px;
-      padding: 0 16px;
-      box-sizing: border-box;
-    }
-
-    .skills-row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      /* centers the row inside the wrapper */
-      align-items: center;
-    }
-
-    /* each skill is a pill whose width depends on its text length */
-    .skill-pill {
-      display: inline-block;
-      white-space: nowrap;
-      padding: 0.45rem 0.9rem;
-      border-radius: 8px;
-      background: var(--card-bg);
-      color: var(--muted);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      font-weight: 600;
-      font-size: clamp(25px, 1.2vw, 30px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      cursor: default;
-    }
-
-    /* keep the same responsive behavior for very small screens */
-    @media (max-width: 480px) {
-      .skills-wrapper {
-        padding: 0 10px;
-      }
-
-      .skill-pill {
-        font-size: 13px;
-        padding: 0.35rem 0.7rem;
-      }
-    }
+         /* pointer behavior: don't show pointer for the whole contact card — only for links */
+         .contactCard {
+         width: 100%;
+         cursor: default;
+         /* ensure no pointer on the card itself */
+         }
+         .contactBottom a,
+         .contactBottom a:link,
+         .contactBottom a:visited {
+         cursor: pointer;
+         /* show pointer only when over actual links */
+         }
+         /* Hover media container */
+         .hover {
+         position: relative;
+         width: 100%;
+         aspect-ratio: 16 / 9;
+         border-radius: calc(var(--card-radius) - 2px);
+         overflow: hidden;
+         display: block;
+         background: linear-gradient(180deg, #111, #222);
+         }
+         .hover img,
+         .hover video {
+         position: absolute;
+         inset: 0;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         display: block;
+         }
+         .hover img {
+         transition: opacity 0.45s ease;
+         }
+         .hover video {
+         opacity: 0;
+         transition: opacity 0.45s ease;
+         pointer-events: none;
+         }
+         /* make the whole card trigger the media swap/play */
+         .card:hover .hover img,
+         .card:focus-within .hover img {
+         opacity: 0;
+         }
+         .card:hover .hover video,
+         .card:focus-within .hover video {
+         opacity: 1;
+         }
+         /* Text */
+         .card p {
+         font-size: clamp(12px, 1.8vw, 14px);
+         line-height: 1.4;
+         height: auto;
+         margin: 12px 0;
+         margin-bottom: 4em;
+         color: var(--muted);
+         white-space: normal;
+         word-break: break-word;
+         flex: 0 0 auto;
+         }
+         /* Call to action styled as button */
+         .cta {
+         display: inline-block;
+         background: var(--accent1);
+         color: #000;
+         padding: 0.5rem 1rem;
+         border-radius: 6px;
+         text-decoration: none;
+         font-weight: 600;
+         margin-top: 12px;
+         align-self: center;
+         position: absolute;
+         bottom:20px;
+         /* keep the button below the paragraph and centered */
+         }
+         .cta:active {
+         transform: translateY(1px);
+         }
+         /* Neon border effect (background blur) */
+         .card::before,
+         .card::after {
+         content: "";
+         position: absolute;
+         inset: -6px;
+         border-radius: calc(var(--card-radius) + 6px);
+         z-index: -1;
+         background-image: conic-gradient(from var(--angle),
+         var(--accent1),
+         var(--accent2),
+         var(--accent1));
+         padding: 3px;
+         transform: translateZ(0);
+         animation: spin 1s linear infinite;
+         }
+         .card::before {
+         filter: blur(40px);
+         opacity: 0.5;
+         }
+         .card::after {
+         mix-blend-mode: screen;
+         }
+         .intro {
+         transform: translateY(100px);
+         margin-right: 30px;
+         margin-left: 30px;
+         margin-bottom: 250px;
+         justify-self: center;
+         justify-content: center;
+         text-align: center;
+         font-size: 25px;
+         }
+         .intro h1 {
+         color: rgb(149, 225, 255);
+         }
+         .intro h2 {
+         margin: -10px 0 20px 0;
+         }
+         .skills-wrapper {
+         width: 100%;
+         max-width: 1200px;
+         /* matches .projects max-width */
+         margin: 24px auto;
+         margin-bottom: clamp(100px, 15vw, 300px);
+         padding: 0 16px;
+         box-sizing: border-box;
+         }
+         .skills-row {
+         display: flex;
+         gap: 20px;
+         flex-wrap: wrap;
+         justify-content: center;
+         /* centers the row inside the wrapper */
+         align-items: center;
+         }
+         /* each skill is a pill whose width depends on its text length */
+         .skill-pill {
+         display: inline-block;
+         white-space: nowrap;
+         padding: 0.45rem 0.9rem;
+         border-radius: 8px;
+         background: var(--card-bg);
+         color: var(--muted);
+         border: 1px solid rgba(255, 255, 255, 0.04);
+         font-weight: 600;
+         font-size: clamp(25px, 1.2vw, 30px);
+         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+         cursor: default;
+         }
+         
+         /* keep the same responsive behavior for very small screens */
 
     @property --angle {
       syntax: "<angle>";
       initial-value: 0deg;
       inherits: false;
     }
+         @keyframes spin {
+         from {
+         --angle: 0deg;
+         }
+         to {
+         --angle: 360deg;
+         }
+         }
 
-    @keyframes spin {
-      from {
-        --angle: 0deg;
+         /* Small screens */
+
+         /* Fix for very large screens */
+
+         .home-button {
+         padding: 10px 20px;
+         position: absolute;
+         top: 20px;
+         left: 20px;
+         background: white;
+         border: none;
+         color: #121212;
+         font-size: 1.5rem;
+         cursor: pointer;
+         border-radius: 8px;
+         }
+         .site-header {
+         border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+         background-color: transparent;
+         position: fixed;
+         /* remain visible after scroll */
+         backdrop-filter: blur(10px);
+         top: 0;
+         left: 0;
+         width: 100%;
+         z-index: 8000;
+         overflow: visible;
+         --site-header-height: 100px;
+         padding-bottom: 100px;
+         }
+         .nav {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         display: flex;
+         justify-content: space-between; /* left icons + right hamburger */
+         align-items: center;
+         padding: 1rem 2rem;
+         z-index: 1000;
+         /* allow absolutely-positioned hamburger inside and keep links centered */
+         }
+         .nav-links a,
+         .nav-links a:link,
+         .nav-links a:visited {
+         color: var(--muted);
+         /* force theme color for all nav links */
+         text-decoration: none;
+         }
+         .nav-links a .my-icons,
+         .nav-links .my-icons {
+         color: inherit;
+         /* ensure font-awesome icons inherit the anchor color */
+         }
+         .navSide.open {
+         left: -220px;
+         }
+         .intro p strong {
+         color: #71bcd3;
+         }
+         .my-icons {
+         font-size: clamp(24px, 5vw, 50px);
+         }
+         .leftIcons{
+         display: flex;
+         gap: 2vw;
+         size-adjust: none;
+         position: fixed;
+         top: 30px;
+         left: 50px;
+         }
+         .headerIcon{
+         color: white;
+         font-size: 60px;
+        }
+        .rightIcon{
+         position: fixed;
+         top: 30px;
+         right: 50px;
+         }
+         .topnav {
+         position: fixed;
+         z-index: 2000;
+         overflow: hidden;
+         right:100px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 1rem 0;
+         z-index: 1000;
+         top: 0;
+         left: 0;
+         right: 0;
+         box-sizing: border-box;
+        }
+         .topnav a{
+           display: block;
+           color: #e7e7e7;
+         text-align: center;
+         padding: 14px 16px;
+         text-decoration: none;
+         font-size: 17px;
+         }
+         .topnav.icon {
+         color: #e7e7e7;
+         font-size: 50px;
+         display: none;
+        }
+
+         .fa{
+           display: none;
+          }
+         @media (min-width: 1400px) {
+         .projects,
+         .intro h1,
+         .intro h2,
+         .intro p,
+         .contact {
+         max-width: 1400px;
+        }
       }
-
-      to {
-        --angle: 360deg;
+      @media screen and (max-width: 1200px) {
+       .fa{
+         display: initial;
+       }
+      .topnav a {display: none;}
+      .topnav.icon {
+      float: right;
+      display: block;
       }
-    }
-
-    @media(max-width: 720px){
-            .topRow, .bottomRow {
-        flex-direction: column;
-        justify-content: center;
+      .leftIcons{
+      display: default;
       }
-    }
-    /* Small screens */
-    @media (max-width: 480px) {
-      .projects {
-        padding: 12px 10px;
+      .topIcons{
+      display: flex;
       }
-
-
-      .card {
-        padding: 0.75rem;
-      }
-
-      .card p {
-        font-size: 13px;
-        max-height: 5.3em;
-      }
-    }
-
-    /* Fix for very large screens */
-    @media (min-width: 1400px) {
-
-      .projects,
-      .intro h1,
-      .intro h2,
-      .intro p,
-      .contact {
-        max-width: 1400px;
-      }
-    }
-
-    .home-button {
-      padding: 10px 20px;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      border: none;
-      color: #121212;
-      font-size: 1.5rem;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-
-    .site-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-      background-color: transparent;
+      .topnav.responsive{
       position: fixed;
-      /* remain visible after scroll */
-      backdrop-filter: blur(10px);
-      top: 0;
+      top: calc(var(--site-header-height,1000px));
       left: 0;
       width: 100%;
-      z-index: 8000;
-      overflow: visible;
-      --site-header-height: 100px;
-      padding-bottom: 100px;
-    }
+      display: block;
+      z-index: 999; /* below header but above page content */
+      background: rgba(10,10,12,0.95); /* optional theme-matching bg */
+      box-sizing: border-box;
+      padding: 8px 12px;
+      }
+      .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+      }
+      }
+      
+      @media (max-width: 900px) {
+        .contact-grid {
+           flex-direction: column;
+          }
+        }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 0;
-      z-index: 1000;
-      position: fixed;
-      left: 100px;
-      /* allow absolutely-positioned hamburger inside and keep links centered */
-    }
+          @media (max-width: 720px) {
+         .topRow, .bottomRow {
+         flex-direction: column;
+         justify-content: center;
+         }
+        }
 
-    /* place hamburger on the left edge of the header but vertically in-line with nav links */
-    .hamburger {
-      color: var(--muted);
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      font-size: 1.6rem;
-      cursor: pointer;
-      z-index: 1001;
-      padding: 6px 10px;
-      border-radius: 6px;
-    }
-
-    .nav-links {
-      color: var(--muted);
-      font-size: 50px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 4rem;
-    }
-
-    .navSide {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding-left: 15px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.02);
-      background-color: transparent;
-      backdrop-filter: blur(10px);
-      /* keep the panel visible in the same place while scrolling */
-      top: 100px;
-      /* same vertical offset as before */
-      left: 0px;
-      /* off-canvas closed position remains unchanged */
-      width: 175px;
-      z-index: 900;
-      overflow: visible;
-      transition: left 0.3s ease;
-    }
-    ul {
-      list-style: none;
-    }
-
-    .nav-links a,
-    .nav-links a:link,
-    .nav-links a:visited {
-      color: var(--muted);
-      /* force theme color for all nav links */
-      text-decoration: none;
-    }
-
-    .navSide a,
-    .navSide a:link,
-    .navSide a:visited {
-      color: var(--muted);
-      /* force theme color for all nav links */
-      font-size: 20px;
-    }
-
-    .nav-links a .my-icons,
-    .nav-links .my-icons {
-      color: inherit;
-      /* ensure font-awesome icons inherit the anchor color */
-    }
-
-    .navSide.open {
-      left: -220px;
-    }
-
-    .intro p strong {
-      color: #71bcd3;
-    }
-
-    
+         @media (max-width: 480px) {
+         .skills-wrapper {
+         padding: 0 10px;
+         }
+         .projects {
+         padding: 12px 10px;
+         }
+         .card {
+         padding: 0.75rem;
+         }
+         .card p {
+         font-size: 13px;
+         max-height: 5.3em;
+         }
+         }
 
 
-
-
-    .topnav {
-            position: fixed;
-            z-index: 2000;
-  overflow: hidden;
-  right:100px;
-        display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 0;
-      z-index: 1000;
-      position: fixed;
+         @media screen and (max-width: 380px) {
+          .headerIcon{
+            font-size: 15vw;
+          }
+.rightIcon{
+  display: initial;
+  position: static;
+  color: red;
 }
-
-.topnav a{
-  float: left;
-  display: block;
-  color: #e7e7e7;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+.topIcons {
+  display: flex;
+  gap: 5vw;
+  justify-content: center;
+  position: fixed;
+  top: 30px;
+  left: 50px;
 }
-
-.topnav.icon {
-  color: #e7e7e7;
-  font-size: 50px;
-  display: none;
+         .leftIcons {
+  display: flex;
+  gap: 5vw;
+  position: static;
 }
-
-@media screen and (max-width: 1600px) {
-  .topnav a {display: none;}
-  .topnav.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 1600px) {
-  .topnav.responsive{
-    position: fixed;
-    top: calc(var(--site-header-height,1000px));
-    left: 0;
-    width: 100%;
-    display: block;
-    z-index: 999; /* below header but above page content */
-    background: rgba(10,10,12,0.95); /* optional theme-matching bg */
-    box-sizing: border-box;
-    padding: 8px 12px;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="site-header">
-    <nav class="nav">
-      <ul class="nav-links">
-        </li>
-        <li>
-          <a class="link" href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn">
-            <i class="fa-brands fa-linkedin my-icons"></i>
-            </a>
-            </li>
-            
-            <li>
-              <a class="link" href="https://github.com/ColeJohnston" target="_blank" title="GitHub">
-                <i class="fa-brands fa-github my-icons"></i>
-                </a>
-                </li>
-
-                <li>
-          <a class="link" href="https://oneafter68.itch.io" target="_blank" title="Itch.io">
-            <i class="fa-brands fa-itch-io my-icons"></i>
-          </a>
-        </li>
-        </ul>
-        <a href="javascript:void(0);" class="topnav icon" id="topnavIcon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-    </a>
-        <div class="topnav" id="myTopnav">
-          <a href="#intro" id="navSide intro" class="navSideIntro">About Me</a>
-          <a href="#projects" id="navSide projects">Projects</a>
-          <a href="#skills" id="navSide skills">Skills</a>
-          <a href="#contact" id="navSide contact">Contact</a>
-        </div>
-        </nav>
-        </header>
-        <div class="intro" id="intro">
-          <h1>Cole Johnston</h1>
-          <h2>Gameplay and Physics Programmer</h2>
-          <p>
+         }
+         
+      </style>
+   </head>
+   <body>
+      <header class="site-header">
+         <nav>
+            <div class="topIcons">
+               <div class="leftIcons">
+                  <a  href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn">
+                  <i class="fa-brands fa-linkedin my-icons headerIcon"></i>
+                  </a>
+                  <a  href="https://github.com/ColeJohnston" target="_blank" title="GitHub">
+                  <i class="fa-brands fa-github my-icons headerIcon"></i>
+                  </a>
+                  <a  href="https://oneafter68.itch.io" target="_blank" title="Itch.io">
+                  <i class="fa-brands fa-itch-io my-icons headerIcon"></i>
+                  </a>
+               </div>
+               <div class="rightIcon">
+                  <a href="javascript:void(0);"  id="topnavIcon" onclick="myFunction()">
+                  <i class="fa fa-bars headerIcon"></i>
+                  </a>
+               </div>
+            </div>
+            <div class="topnav" id="myTopnav">
+               <a href="#intro" id="navSide intro" class="navSideIntro">About Me</a>
+               <a href="#projects" id="navSide projects">Projects</a>
+               <a href="#skills" id="navSide skills">Skills</a>
+               <a href="#contact" id="navSide contact">Links & Info</a>
+            </div>
+         </nav>
+      </header>
+      <div class="intro" id="intro">
+         <h1 style="font-weight:bolder">Cole Johnston</h1>
+         <h2>Gameplay and Physics Programmer</h2>
+         <p>
             I am a <strong>video game programmer</strong> with a specialty in
             <strong>gameplay</strong> and <strong>physics</strong> systems. I love
             solving complex problems and building solid foundations that can be
             built on by myself and others. Before studying in video game
             programming, I graduated with a <strong>physics degree</strong>. This
             taught me to see the world through a different lens and helped shape the
-      way I approach development and problem solving.
-    </p>
-    <p>
-      I am looking for an <strong>internship</strong> for the
-      <strong>Summer</strong> of <strong>2026</strong> at a studio where I can
-      contribute to projects while learning from other developers to grow my
-      skills.
-    </p>
-    </div>
-    <h1 id="projects" class="page-title" style="color: #e7e7e7">Projects:</h1>
-
-    <div class="projects-grid">
-      <div class="topRow">
-        <!-- Card 1 -->
-        <div class="scale">
-          <article class="card">
-            <a class="card-link" href="KillerJournalist.html" aria-label="Killer Journalist on itch.io">
-              <h2>Killer Journalist</h2>
-              <div class="hover" tabindex="0">
-                <img src="https://img.itch.zone/aW1hZ2UvMzk4OTc3Ny8yMzc5NjUwNC5wbmc=/original/G1jljx.png"
-                  alt="Killer Journalist screenshot" />
-                <video src="Killer Journalist - OfficialTrailer VFinal.mp4" preload="metadata" muted loop
-                  playsinline></video>
-              </div>
-              <p>
-                Winner of Best Game Overall and Best Art for the 2025 MGD Game
-                Jam
-                <br />
-                <br />
-                Puzzle - First Person
-              </p>
-              <a class="cta" href="https://time-moth.itch.io/killer-journalist" target="_blank">Play Now</a>
-            </a>
-          </article>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="scale">
-          <article class="card">
-            <a class="card-link" href="SelfReflection.html" aria-label="Self Reflection on itch.io">
-              <h2>Self Reflection</h2>
-              <div class="hover" tabindex="0">
-                <img src="https://img.itch.zone/aW1nLzIwNzI3MzgxLnBuZw==/original/zTkThk.png"
-                  alt="Self Reflection screenshot" />
-                <video src="SelfReflection.mp4" preload="metadata" muted loop playsinline></video>
-              </div>
-              <p>
-                3rd Place Winner for the 2025 Behaviour Interactive Game Jam
-                <br />
-                <br />
-                Narrative - Exploration - First Person
-              </p>
-              <a class="cta" href="https://oneafter68.itch.io/self-reflection" target="_blank">Play Now</a>
-            </a>
-          </article>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="scale">
-          <article class="card">
-            <a class="card-link" href="ScatteredTime.html" aria-label="Scattered Time on itch.io">
-              <h2>Scattered Time</h2>
-              <div class="hover" tabindex="0">
-                <img src="https://img.itch.zone/aW1nLzIwOTgwNjQxLnBuZw==/original/qeatR0.png"
-                  alt="Scattered Time screenshot" />
-                <video src="ScatteredTime.mp4" preload="metadata" muted loop playsinline></video>
-              </div>
-              <p>
-                3rd Place Winner for the 2025 Lasalle College Game Jam
-                <br />
-                <br />
-                First Person - Stealth - Exploration
-              </p>
-              <a class="cta" href="https://oneafter68.itch.io/scattered-time" target="_blank">Play Now</a>
-            </a>
-          </article>
-        </div>
+            way I approach development and problem solving.
+         </p>
+         <p>
+            I am looking for an <strong>internship</strong> for the
+            <strong>Summer</strong> of <strong>2026</strong> at a studio where I can
+            contribute to projects while learning from other developers to grow my
+            skills.
+         </p>
       </div>
-      <div class="bottomRow">
-        <!-- Card 4 -->
-        <div class="scale">
-          <article class="card">
-            <a class="card-link" href="StemsFromNothing.html" aria-label="Stems From Nothing on itch.io">
-              <h2>Stems From Nothing</h2>
-              <div class="hover" tabindex="0">
-                <img src="https://img.itch.zone/aW1nLzIzMjYyOTQ3LnBuZw==/original/2XA1B6.png"
-                  alt="Stems From Nothing screenshot" />
-                <video src="StemsFromNothing.mp4" preload="metadata" muted loop playsinline></video>
-              </div>
-              <p>
-                Music-Building game created for the 2025 NAD Creative Jam
-                <br />
-                <br />
-                Fast Paced - Third Person - Mouse Only
-              </p>
-              <a class="cta" href="https://roxymarcoux.itch.io/stems-from-nothing" target="_blank">Play Now</a>
-            </a>
-          </article>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="scale">
-          <article class="card">
-            <a class="card-link" href="EatLeaf.html" aria-label="Eat Leaf on itch.io">
-              <h2>Eat Leaf</h2>
-              <div class="hover" tabindex="0">
-                <img src="https://img.itch.zone/aW1nLzE1NjI3ODE4LnBuZw==/105x83%23/GD901u.png"
-                  alt="Eat Leaf screenshot" />
-                <video src="EatLeafPreview.mp4" preload="metadata" muted loop playsinline></video>
-              </div>
-              <p>
-                Solo Project made in 2 months as a first, self-taught project
-                in Godot
-                <br />
-                <br />
-                Platformer - In browser
-              </p>
-              <a class="cta" href="https://oneafter68.itch.io/eat-leaf" target="_blank">Play Now</a>
-            </a>
-          </article>
-        </div>
+      <h1 id="projects" class="page-title" style="color: #e7e7e7; font-size: 35px;">Projects:</h1>
+      <div class="projects-grid">
+         <div class="topRow">
+            <!-- Card 1 -->
+            <div class="scale">
+               <article class="card">
+                  <a class="card-link" href="KillerJournalist.html" aria-label="Killer Journalist on itch.io">
+                     <h2>Killer Journalist</h2>
+                     <div class="hover" tabindex="0">
+                        <img src="https://img.itch.zone/aW1hZ2UvMzk4OTc3Ny8yMzc5NjUwNC5wbmc=/original/G1jljx.png"
+                           alt="Killer Journalist screenshot" />
+                        <video src="Killer Journalist - OfficialTrailer VFinal.mp4" preload="metadata" muted loop
+                           playsinline></video>
+                     </div>
+                     <p>
+                        Winner of Best Game Overall and Best Art for the 2025 MGD Game
+                        Jam
+                        <br />
+                        <br />
+                        Puzzle - First Person
+                     </p>
+                  <a class="cta" href="https://time-moth.itch.io/killer-journalist" target="_blank">Play Now</a>
+                  </a>
+               </article>
+            </div>
+            <!-- Card 2 -->
+            <div class="scale">
+               <article class="card">
+                  <a class="card-link" href="SelfReflection.html" aria-label="Self Reflection on itch.io">
+                     <h2>Self Reflection</h2>
+                     <div class="hover" tabindex="0">
+                        <img src="https://img.itch.zone/aW1nLzIwNzI3MzgxLnBuZw==/original/zTkThk.png"
+                           alt="Self Reflection screenshot" />
+                        <video src="SelfReflection.mp4" preload="metadata" muted loop playsinline></video>
+                     </div>
+                     <p>
+                        3rd Place Winner for the 2025 Behaviour Interactive Game Jam
+                        <br />
+                        <br />
+                        Narrative - Exploration - First Person
+                     </p>
+                  <a class="cta" href="https://oneafter68.itch.io/self-reflection" target="_blank">Play Now</a>
+                  </a>
+               </article>
+            </div>
+            <!-- Card 3 -->
+            <div class="scale">
+               <article class="card">
+                  <a class="card-link" href="ScatteredTime.html" aria-label="Scattered Time on itch.io">
+                     <h2>Scattered Time</h2>
+                     <div class="hover" tabindex="0">
+                        <img src="https://img.itch.zone/aW1nLzIwOTgwNjQxLnBuZw==/original/qeatR0.png"
+                           alt="Scattered Time screenshot" />
+                        <video src="ScatteredTime.mp4" preload="metadata" muted loop playsinline></video>
+                     </div>
+                     <p>
+                        3rd Place Winner for the 2025 Lasalle College Game Jam
+                        <br />
+                        <br />
+                        First Person - Stealth - Exploration
+                     </p>
+                  <a class="cta" href="https://oneafter68.itch.io/scattered-time" target="_blank">Play Now</a>
+                  </a>
+               </article>
+            </div>
+         </div>
+         <div class="bottomRow">
+            <!-- Card 4 -->
+            <div class="scale">
+               <article class="card">
+                  <a class="card-link" href="StemsFromNothing.html" aria-label="Stems From Nothing on itch.io">
+                     <h2>Stems From Nothing</h2>
+                     <div class="hover" tabindex="0">
+                        <img src="https://img.itch.zone/aW1nLzIzMjYyOTQ3LnBuZw==/original/2XA1B6.png"
+                           alt="Stems From Nothing screenshot" />
+                        <video src="StemsFromNothing.mp4" preload="metadata" muted loop playsinline></video>
+                     </div>
+                     <p>
+                        Music-Building game created for the 2025 NAD Creative Jam
+                        <br />
+                        <br />
+                        Fast Paced - Third Person - Mouse Only
+                     </p>
+                  <a class="cta" href="https://roxymarcoux.itch.io/stems-from-nothing" target="_blank">Play Now</a>
+                  </a>
+               </article>
+            </div>
+            <!-- Card 5 -->
+            <div class="scale">
+               <article class="card">
+                  <a class="card-link" href="EatLeaf.html" aria-label="Eat Leaf on itch.io">
+                     <h2>Eat Leaf</h2>
+                     <div class="hover" tabindex="0">
+                        <img src="https://img.itch.zone/aW1nLzE1NjI3ODE4LnBuZw==/105x83%23/GD901u.png"
+                           alt="Eat Leaf screenshot" />
+                        <video src="EatLeafPreview.mp4" preload="metadata" muted loop playsinline></video>
+                     </div>
+                     <p>
+                        Solo Project made in 2 months as a first, self-taught project
+                        in Godot
+                        <br />
+                        <br />
+                        Platformer - In browser
+                     </p>
+                  <a class="cta" href="https://oneafter68.itch.io/eat-leaf" target="_blank">Play Now</a>
+                  </a>
+               </article>
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
-  <!-- skills area: spans/caps to the same width as the projects section -->
-  <h1 id="skills" class="skills" style="
-        text-decoration: underline;
-        text-align: center;
-        font-size: 35px;
-        margin-top: 100px;
-      ">
-    Skills:
-  </h1>
-  <div class="skills-wrapper" aria-label="skills">
-    <div class="skills-row">
-      <div class="skill-pill">C++</div>
-      <div class="skill-pill">C#</div>
-      <div class="skill-pill">Unity</div>
-      <div class="skill-pill">Unreal</div>
-      <div class="skill-pill">Godot</div>
-      <div class="skill-pill">SQL</div>
-      <div class="skill-pill">Javascript</div>
-      <div class="skill-pill">CSS</div>
-      <div class="skill-pill">Html</div>
-      <div class="skill-pill">Python</div>
-      <div class="skill-pill">Java</div>
-      <div class="skill-pill">GDScript</div>
-      <div class="skill-pill">Unreal Blueprints</div>
-      <div class="skill-pill">Perforce</div>
-      <div class="skill-pill">GitHub</div>
-    </div>
-  </div>
-  <div id="contact" class="contact" style="padding-bottom: 150px;">
-    <h1 style="text-decoration: underline">Contact Me!</h1>
-    <div class="projects-grid">
-      <article class="contactCard project-card reveal" style="
-            border: 5px solid rgb(0, 183, 255);
-            box-shadow: 0 6px 25px rgb(0, 183, 255);
-          ">
-        <div class="card-body">
-          <h3 class="email" style="color: white">
-            <i class="fa-solid fa-envelope"></i> Email
-          </h3>
-          <p>
-            <a style="color: rgb(149, 225, 255)" href="mailto:Cole.e.Johnston16@gmail.com" class="email" target="_blank"
-              title="Email">Cole.e.Johnston16@gmail.com
-            </a>
-          </p>
-        </div>
-      </article>
-      <article class="contactCard project-card reveal" style="
-            border: 5px solid rgb(90, 0, 102);
-            box-shadow: 0 6px 25px rgb(90, 0, 102);
-          ">
-        <div class="card-body">
-          <h3 class="linkedIn">
-            <i class="fa-brands fa-linkedin"></i> Let's Connect!
-          </h3>
-          <p>
-            <a class="link" href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn"
-              style="color: rgb(149, 225, 255)">LinkedIn</a>
-          </p>
-        </div>
-      </article>
+      </div>
+      <!-- skills area: spans/caps to the same width as the projects section -->
+      <h1 id="skills" class="skills" style="
+         text-decoration: underline;
+         text-align: center;
+         font-size: 35px;
+         margin-top: 100px;
+         ">
+         Skills:
+      </h1>
+      <div class="skills-wrapper" aria-label="skills">
+         <div class="skills-row">
+            <div class="skill-pill">C++</div>
+            <div class="skill-pill">C#</div>
+            <div class="skill-pill">Unity</div>
+            <div class="skill-pill">Unreal</div>
+            <div class="skill-pill">Godot</div>
+            <div class="skill-pill">SQL</div>
+            <div class="skill-pill">Javascript</div>
+            <div class="skill-pill">CSS</div>
+            <div class="skill-pill">Html</div>
+            <div class="skill-pill">Python</div>
+            <div class="skill-pill">Java</div>
+            <div class="skill-pill">GDScript</div>
+            <div class="skill-pill">Unreal Blueprints</div>
+            <div class="skill-pill">Perforce</div>
+            <div class="skill-pill">GitHub</div>
+         </div>
+      </div>
+      <div id="contact" class="contactBottom" style="padding-bottom: 150px;">
+         <h1 style="text-decoration: underline">Links & Info</h1>
+         <div class="contact-grid">
             <article class="contactCard project-card reveal" style="
-            border: 5px solid rgb(0, 183, 255);
-            box-shadow: 0 6px 25px rgb(0, 183, 255);
-          ">
-        <div class="card-body">
-          <h3 class="email" style="color: white">
-            <i class="fa-solid fa-sheet-plastic"></i> Resume
-          </h3>
-          <p>
-            <a style="color: rgb(149, 225, 255)" href="CV.pdf" download>Download pdf</a>
-          </p>
-        </div>
-      </article>
-    </div>
-  </div>
-    <script>
-      // Play/pause the video when hovering or focusing the parent .card
-      document.querySelectorAll(".card").forEach((card) => {
-        const video = card.querySelector(".hover video");
-        if (!video) return;
-
-        card.addEventListener("pointerenter", () => {
-          video.currentTime = 0;
-          const p = video.play();
-          if (p && p.catch) p.catch(() => {});
-        });
-        card.addEventListener("pointerleave", () => {
-          video.pause();
-          video.currentTime = 0;
-        });
-
-        // keyboard accessibility: focusing any element inside the card triggers playback
-        card.addEventListener("focusin", () => {
-          const p = video.play();
-          if (p && p.catch) p.catch(() => {});
-        });
-        card.addEventListener("focusout", () => {
-          video.pause();
-          video.currentTime = 0;
-        });
-      });
-
-      // Make clicking anywhere inside a .card navigate to its primary .card-link,
-      // but allow native clicks on anchors/buttons/inputs to work normally
-      document.querySelectorAll(".card").forEach((card) => {
-        const link = card.querySelector(".card-link");
-        if (!link) return;
-
-        card.addEventListener("click", (e) => {
-          // only trigger navigation if the click wasn't on a nested interactive element
-          if (
-            e.target.tagName !== "A" &&
-            !["BUTTON", "INPUT"].includes(e.target.tagName)
-          ) {
-            e.preventDefault();
-            link.click();
-          }
-        });
-      });
-    </script>
-  <script>
-    { /* replaced script block to set default open/closed based on viewport */ }
-
-    const burger = document.getElementById("hamburgerBtn");
-    const nav = document.getElementById("navSide");
-
-    // breakpoint for "mobile" (matches your existing CSS breakpoint usage)
-    const mobileMQ = window.matchMedia("(max-width: 720px)");
-
-    // Apply default: mobile -> closed, otherwise -> open.
-    // NOTE: in your CSS the .navSide.open class moves the panel off-canvas,
-    // so "closed" = add('open'), "open" = remove('open').
-    function applyNavDefault(e) {
-      const isMobile = e.matches === undefined ? mobileMQ.matches : e.matches;
-      if (isMobile) {
-        nav.classList.add("open");    // mobile: closed by default
-      } else {
-        nav.classList.remove("open"); // desktop/tablet: open by default
-      }
-    }
-
-    // initial set
-    applyNavDefault(mobileMQ);
-
-    // keep defaults in sync if viewport changes
-    if (typeof mobileMQ.addEventListener === "function") {
-      mobileMQ.addEventListener("change", applyNavDefault);
-    } else if (typeof mobileMQ.addListener === "function") {
-      mobileMQ.addListener(applyNavDefault);
-    }
-
-    // hamburger toggles the state as before
-    burger.addEventListener("click", () => {
-      nav.classList.toggle("open");
-    });
-
-    { /* ...existing video / card scripts follow unchanged ... */ }
-    // ...existing code...
-  </script>
-<script>
-  function getDocumentTop(element) {
-    let el = document.getElementById(element);
-    let top = 0;
-    while (el) {
-        top += el.offsetTop;
-        el = el.offsetParent;
-    }
-    return top;
-}
-      document.getElementById("navSide intro").style.color = "rgb(0, 183, 255)";
-            document.getElementById("navSide intro").style.fontSize = "30px";
-  window.addEventListener("scroll", () => {
-    let currentHeight = window.scrollY + (window.innerHeight / 2);
-
-    var body = document.body, html = document.documentElement;
-
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-
-    if(currentHeight >= getDocumentTop("contact") || window.innerHeight + window.scrollY == height){
-      document.getElementById("navSide intro").style.color="#e7e7e7";
-      document.getElementById("navSide projects").style.color="#e7e7e7";
-      document.getElementById("navSide skills").style.color="#e7e7e7";
-      document.getElementById("navSide contact").style.color = "rgb(0, 183, 255)";
-
-      document.getElementById("navSide intro").style.fontSize = "20px";
-      document.getElementById("navSide projects").style.fontSize = "20px";
-      document.getElementById("navSide skills").style.fontSize = "20px";
-      document.getElementById("navSide contact").style.fontSize = "30px";
-    }
-    else if(currentHeight >= getDocumentTop("skills")){
-      document.getElementById("navSide intro").style.color="#e7e7e7";
-      document.getElementById("navSide projects").style.color="#e7e7e7";
-      document.getElementById("navSide skills").style.color="rgb(0, 183, 255)";
-      document.getElementById("navSide contact").style.color = "#e7e7e7";
-
-      document.getElementById("navSide intro").style.fontSize = "20px";
-      document.getElementById("navSide projects").style.fontSize = "20px";
-      document.getElementById("navSide skills").style.fontSize = "30px";
-      document.getElementById("navSide contact").style.fontSize = "20px";
-    }
-    else if(currentHeight >= getDocumentTop("projects")){
-      document.getElementById("navSide intro").style.color="#e7e7e7";
-      document.getElementById("navSide projects").style.color="rgb(0, 183, 255)";
-      document.getElementById("navSide skills").style.color="#e7e7e7";
-      document.getElementById("navSide contact").style.color = "#e7e7e7";
-
-      document.getElementById("navSide intro").style.fontSize = "20px";
-      document.getElementById("navSide projects").style.fontSize = "30px";
-      document.getElementById("navSide skills").style.fontSize = "20px";
-      document.getElementById("navSide contact").style.fontSize = "20px";
-    }
-    else{
-      document.getElementById("navSide intro").style.color="rgb(0, 183, 255)";
-      document.getElementById("navSide projects").style.color="#e7e7e7";
-      document.getElementById("navSide skills").style.color="#e7e7e7";
-      document.getElementById("navSide contact").style.color = "#e7e7e7";
-
-      document.getElementById("navSide intro").style.fontSize = "30px";
-      document.getElementById("navSide projects").style.fontSize = "20px";
-      document.getElementById("navSide skills").style.fontSize = "20px";
-      document.getElementById("navSide contact").style.fontSize = "20px";
-    }
-    
-  });
-
-  </script>
-  <script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav" || x.className === "topnavIcon") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
-</body>
-
+               border: 5px solid rgb(0, 183, 255);
+               box-shadow: 0 6px 25px rgb(0, 183, 255);
+               ">
+               <div class="card-body">
+                  <h3 class="email" style="color: white">
+                     <i class="fa-solid fa-envelope"></i> Email
+                  </h3>
+                  <p>
+                     <a style="color: rgb(149, 225, 255)" href="mailto:Cole.e.Johnston16@gmail.com" class="email" target="_blank"
+                        title="Email">Cole.e.Johnston16@gmail.com
+                     </a>
+                  </p>
+               </div>
+            </article>
+            <article class="contactCard project-card reveal" style="
+               border: 5px solid rgb(90, 0, 102);
+               box-shadow: 0 6px 25px rgb(90, 0, 102);
+               ">
+               <div class="card-body">
+                  <h3 class="linkedIn">
+                     <i class="fa-brands fa-linkedin"></i> Let's Connect!
+                  </h3>
+                  <p>
+                     <a class="link" href="https://www.linkedin.com/in/cole-e-johnston" target="_blank" title="LinkedIn"
+                        style="color: rgb(149, 225, 255)">LinkedIn</a>
+                  </p>
+               </div>
+            </article>
+            <article class="contactCard project-card reveal" style="
+               border: 5px solid rgb(0, 183, 255);
+               box-shadow: 0 6px 25px rgb(0, 183, 255);
+               ">
+               <div class="card-body">
+                  <h3 class="email" style="color: white">
+                     <i class="fa-solid fa-sheet-plastic"></i> Resume
+                  </h3>
+                  <p>
+                     <a style="color: rgb(149, 225, 255)" href="CV.pdf" download>Download pdf</a>
+                  </p>
+               </div>
+            </article>
+         </div>
+      </div>
+      <script>
+         // Play/pause the video when hovering or focusing the parent .card
+         document.querySelectorAll(".card").forEach((card) => {
+           const video = card.querySelector(".hover video");
+           if (!video) return;
+         
+           card.addEventListener("pointerenter", () => {
+             video.currentTime = 0;
+             const p = video.play();
+             if (p && p.catch) p.catch(() => {});
+           });
+           card.addEventListener("pointerleave", () => {
+             video.pause();
+             video.currentTime = 0;
+           });
+         
+           // keyboard accessibility: focusing any element inside the card triggers playback
+           card.addEventListener("focusin", () => {
+             const p = video.play();
+             if (p && p.catch) p.catch(() => {});
+           });
+           card.addEventListener("focusout", () => {
+             video.pause();
+             video.currentTime = 0;
+           });
+         });
+         
+         // Make clicking anywhere inside a .card navigate to its primary .card-link,
+         // but allow native clicks on anchors/buttons/inputs to work normally
+         document.querySelectorAll(".card").forEach((card) => {
+           const link = card.querySelector(".card-link");
+           if (!link) return;
+         
+           card.addEventListener("click", (e) => {
+             // only trigger navigation if the click wasn't on a nested interactive element
+             if (
+               e.target.tagName !== "A" &&
+               !["BUTTON", "INPUT"].includes(e.target.tagName)
+             ) {
+               e.preventDefault();
+               link.click();
+             }
+           });
+         });
+      </script>
+      <script>
+         { /* replaced script block to set default open/closed based on viewport */ }
+         
+         const burger = document.getElementById("hamburgerBtn");
+         const nav = document.getElementById("navSide");
+         
+         // breakpoint for "mobile" (matches your existing CSS breakpoint usage)
+         const mobileMQ = window.matchMedia("(max-width: 720px)");
+         
+         // Apply default: mobile -> closed, otherwise -> open.
+         // NOTE: in your CSS the .navSide.open class moves the panel off-canvas,
+         // so "closed" = add('open'), "open" = remove('open').
+         function applyNavDefault(e) {
+           const isMobile = e.matches === undefined ? mobileMQ.matches : e.matches;
+           if (isMobile) {
+             nav.classList.add("open");    // mobile: closed by default
+           } else {
+             nav.classList.remove("open"); // desktop/tablet: open by default
+           }
+         }
+         
+         // initial set
+         applyNavDefault(mobileMQ);
+         
+         // keep defaults in sync if viewport changes
+         if (typeof mobileMQ.addEventListener === "function") {
+           mobileMQ.addEventListener("change", applyNavDefault);
+         } else if (typeof mobileMQ.addListener === "function") {
+           mobileMQ.addListener(applyNavDefault);
+         }
+         
+         // hamburger toggles the state as before
+         burger.addEventListener("click", () => {
+           nav.classList.toggle("open");
+         });
+         
+         { /* ...existing video / card scripts follow unchanged ... */ }
+         // ...existing code...
+      </script>
+      <script>
+         function getDocumentTop(element) {
+           let el = document.getElementById(element);
+           let top = 0;
+           while (el) {
+               top += el.offsetTop;
+               el = el.offsetParent;
+           }
+           return top;
+         }
+             document.getElementById("navSide intro").style.color = "rgb(0, 183, 255)";
+                   document.getElementById("navSide intro").style.fontSize = "30px";
+         window.addEventListener("scroll", () => {
+           let currentHeight = window.scrollY + (window.innerHeight / 2);
+         
+           var body = document.body, html = document.documentElement;
+         
+           var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+         
+           if(currentHeight >= getDocumentTop("contact") || window.innerHeight + window.scrollY == height){
+             document.getElementById("navSide intro").style.color="#e7e7e7";
+             document.getElementById("navSide projects").style.color="#e7e7e7";
+             document.getElementById("navSide skills").style.color="#e7e7e7";
+             document.getElementById("navSide contact").style.color = "rgb(0, 183, 255)";
+         
+             document.getElementById("navSide intro").style.fontSize = "20px";
+             document.getElementById("navSide projects").style.fontSize = "20px";
+             document.getElementById("navSide skills").style.fontSize = "20px";
+             document.getElementById("navSide contact").style.fontSize = "30px";
+           }
+           else if(currentHeight >= getDocumentTop("skills")){
+             document.getElementById("navSide intro").style.color="#e7e7e7";
+             document.getElementById("navSide projects").style.color="#e7e7e7";
+             document.getElementById("navSide skills").style.color="rgb(0, 183, 255)";
+             document.getElementById("navSide contact").style.color = "#e7e7e7";
+         
+             document.getElementById("navSide intro").style.fontSize = "20px";
+             document.getElementById("navSide projects").style.fontSize = "20px";
+             document.getElementById("navSide skills").style.fontSize = "30px";
+             document.getElementById("navSide contact").style.fontSize = "20px";
+           }
+           else if(currentHeight >= getDocumentTop("projects")){
+             document.getElementById("navSide intro").style.color="#e7e7e7";
+             document.getElementById("navSide projects").style.color="rgb(0, 183, 255)";
+             document.getElementById("navSide skills").style.color="#e7e7e7";
+             document.getElementById("navSide contact").style.color = "#e7e7e7";
+         
+             document.getElementById("navSide intro").style.fontSize = "20px";
+             document.getElementById("navSide projects").style.fontSize = "30px";
+             document.getElementById("navSide skills").style.fontSize = "20px";
+             document.getElementById("navSide contact").style.fontSize = "20px";
+           }
+           else{
+             document.getElementById("navSide intro").style.color="rgb(0, 183, 255)";
+             document.getElementById("navSide projects").style.color="#e7e7e7";
+             document.getElementById("navSide skills").style.color="#e7e7e7";
+             document.getElementById("navSide contact").style.color = "#e7e7e7";
+         
+             document.getElementById("navSide intro").style.fontSize = "30px";
+             document.getElementById("navSide projects").style.fontSize = "20px";
+             document.getElementById("navSide skills").style.fontSize = "20px";
+             document.getElementById("navSide contact").style.fontSize = "20px";
+           }
+           
+         });
+         
+      </script>
+      <script>
+         function myFunction() {
+           var x = document.getElementById("myTopnav");
+           if (x.className === "topnav" || x.className === "topnavIcon") {
+             x.className += " responsive";
+           } else {
+             x.className = "topnav";
+           }
+         }
+      </script>
+   </body>
 </html>
