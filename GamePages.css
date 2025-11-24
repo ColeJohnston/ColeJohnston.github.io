@@ -62,7 +62,7 @@ body {
 
 .home-button {
     padding: 10px 20px;
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     background: white;
@@ -100,4 +100,9 @@ body {
     height: 25px;
     margin-right: 8px;
     vertical-align: middle;
+}
+
+li {
+    margin-right: 50px;
+    margin-bottom: 25px;
 }
