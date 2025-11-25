@@ -7,6 +7,9 @@
       <title>Cole Johnston</title>
       <link rel="icon" type="image/png" href="Favicons/IndexFavicon.png" />
       <style>
+        html {
+  scroll-behavior: smooth;
+}
          body::before {
          content: "";
          position: fixed;
@@ -879,8 +882,8 @@
            var body = document.body, html = document.documentElement;
          
            var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-         
-           if(currentHeight >= getDocumentTop("contact") || window.innerHeight + window.scrollY == height){
+           console.log((window.innerHeight + window.scrollY)+ " " + height)
+           if(currentHeight >= getDocumentTop("contact") || window.innerHeight + window.scrollY + 10 >= height){
              document.getElementById("navSide intro").style.color="#e7e7e7";
              document.getElementById("navSide projects").style.color="#e7e7e7";
              document.getElementById("navSide skills").style.color="#e7e7e7";
