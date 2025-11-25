@@ -82,6 +82,7 @@
          display: flex;
          gap: 5vw;
          grid-template-columns: repeat(3, minmax(100px, 1fr));
+         justify-content: center;
          justify-items: center;
          align-items: stretch;
          }
@@ -249,14 +250,16 @@
          mix-blend-mode: screen;
          }
          .intro {
+            text-align: center;
          transform: translateY(100px);
          margin-right: 30px;
          margin-left: 30px;
          margin-bottom: 250px;
-         justify-self: center;
-         justify-content: center;
-         text-align: center;
          font-size: 25px;
+         }
+         .introWrapper{
+            display: flex;
+            justify-content: center;
          }
          .intro h1 {
          color: rgb(149, 225, 255);
@@ -572,6 +575,7 @@
             </div>
          </nav>
       </header>
+      <div class="introWrapper">
       <div class="intro" id="intro">
          <h1 style="font-weight:bolder">Cole Johnston</h1>
          <h2>Gameplay and Physics Programmer</h2>
@@ -590,6 +594,7 @@
             contribute to projects while learning from other developers to grow my
             skills.
          </p>
+      </div>
       </div>
       <h1 id="projects" class="page-title" style="color: #e7e7e7; font-size: 35px;">Projects</h1>
       <p style="text-align: center; margin-top:-30px; margin-bottom: 50px; color: rgba(187, 187, 187, 0.699)">(Hover for preview)</p>
