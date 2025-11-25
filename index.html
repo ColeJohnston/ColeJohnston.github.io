@@ -236,7 +236,7 @@
          var(--accent1));
          padding: 3px;
          transform: translateZ(0);
-         animation: spin 1s linear infinite;
+         animation: spin 2s linear infinite;
          }
          .card::before {
          filter: blur(40px);
@@ -330,7 +330,7 @@
          background-color: transparent;
          position: fixed;
          /* remain visible after scroll */
-         backdrop-filter: blur(10px);
+         backdrop-filter: blur(6px);
          top: 0;
          left: 0;
          width: 100%;
@@ -339,6 +339,10 @@
          --site-header-height: 100px;
          padding-bottom: 100px;
          }
+         
+
+
+         
          .nav {
          position: fixed;
          top: 0;
@@ -379,6 +383,8 @@
          position: fixed;
          top: 20px;
          left: 50px;
+             z-index: 1200;       /* above header/topnav overlays */
+    pointer-events: auto;
          }
          .headerIcon{
          color: white;
@@ -461,6 +467,13 @@
       display: block;
       text-align: left;
       }
+      }
+
+      .site-footer{
+        text-align: center;
+        width: 100%;
+        border-top: solid rgba(0, 183, 255, 0.171) 1px;
+        padding: 30px;
       }
       
       @media (max-width: 900px) {
@@ -552,7 +565,7 @@
          <h1 style="font-weight:bolder">Cole Johnston</h1>
          <h2>Gameplay and Physics Programmer</h2>
          <p>
-            I am a <strong>video game programmer</strong> with a specialty in
+            I am a <strong>video game programmer</strong> in <strong></strong> with a specialty in
             <strong>gameplay</strong> and <strong>physics</strong> systems. I love
             solving complex problems and building solid foundations that can be
             built on by myself and others. Before studying in video game
@@ -567,7 +580,7 @@
             skills.
          </p>
       </div>
-      <h1 id="projects" class="page-title" style="color: #e7e7e7; font-size: 35px;">Projects:</h1>
+      <h1 id="projects" class="page-title" style="color: #e7e7e7; font-size: 35px;">Projects</h1>
       <p style="text-align: center; margin-top:-30px; margin-bottom: 50px; color: rgba(187, 187, 187, 0.699)">(Hover for preview)</p>
       <div class="projects-grid">
          <div class="topRow">
@@ -686,7 +699,7 @@
          font-size: 35px;
          margin-top: 100px;
          ">
-         Skills:
+         Skills
       </h1>
       <div class="skills-wrapper" aria-label="skills">
          <div class="skills-row">
@@ -754,6 +767,9 @@
             </article>
          </div>
       </div>
+          <footer class="site-footer">
+        <small>© <span id="year"></span> 2025 Cole Johnston</small>
+    </footer>
       <script>
          // Play/pause the video when hovering or focusing the parent .card
          document.querySelectorAll(".card").forEach((card) => {
