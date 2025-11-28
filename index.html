@@ -6,545 +6,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
       <title>Cole Johnston</title>
       <link rel="icon" type="image/png" href="Favicons/IndexFavicon.png" />
-      <style>
-        html {
-  scroll-behavior: smooth;
-}
-         body::before {
-         content: "";
-         position: fixed;
-         inset: 0;
-         pointer-events: none;
-         z-index: -1;
-         background:
-         radial-gradient(circle at 20% 20%, rgba(75, 120, 255, 0.18), transparent 60%),
-         radial-gradient(circle at 80% 80%, rgba(180, 80, 255, 0.18), transparent 60%),
-         radial-gradient(circle at 70% 20%, rgba(80, 255, 220, 0.15), transparent 60%);
-         mix-blend-mode: screen;
-         filter: blur(40px);
-         }
-         :root {
-         --bg: #1b1b1b;
-         --card-bg: #1c1f2b;
-         --accent1: rgb(0, 183, 255);
-         --accent2: rgb(90, 0, 102);
-         --muted: #e7e7e7;
-         --card-radius: 10px;
-         }
-         /* Global */
-         * {
-         box-sizing: border-box;
-         }
-         html,
-         body {
-         height: 100%;
-         scroll-padding-top: 200px;
-         }
-         body {
-         margin: 0;
-         font-family: system-ui, -apple-system, "Segoe UI", Roboto,
-         "Helvetica Neue", Arial;
-         background:
-         repeating-linear-gradient(135deg,
-         rgba(90, 150, 255, 0.08) 0px,
-         rgba(90, 150, 255, 0.08) 2px,
-         rgba(200, 80, 255, 0.08) 2px,
-         rgba(200, 80, 255, 0.08) 4px),
-         #0a0b0d;
-         color: var(--muted);
-         -webkit-font-smoothing: antialiased;
-         -moz-osx-font-smoothing: grayscale;
-         }
-         .projects {
-         max-width: 1200px;
-         margin: 32px auto;
-         padding: 16px;
-         margin-top: 10px;
-         }
-         h1.page-title {
-         text-align: center;
-         text-decoration: underline;
-         font-size: clamp(28px, 4.5vw, 50px);
-         margin: 100px 0 30px;
-         }
-         /* Responsive grid */
-         .projects-grid {
-         justify-content: center;
-         justify-items: center;
-         margin: 30px;
-         /* display: grid;
-         gap: 20px;
-         grid-template-columns: repeat(3, minmax(260px, 1fr));
-         align-items: start;
-         justify-items: center; */
-         }
-         .topRow {
-         display: flex;
-         gap: 5vw;
-         grid-template-columns: repeat(3, minmax(100px, 1fr));
-         justify-content: center;
-         justify-items: center;
-         align-items: stretch;
-         }
-         .bottomRow {
-         margin-top: 5vw;
-         display: flex;
-         gap: 5vw;
-         grid-template-columns: repeat(2, minmax(100px, 1fr));
-         justify-content: center;
-         justify-items: center;
-         align-items: stretch;
-         margin-bottom: 150px;
-         }
-         /* Card */
-         .card {
-         display: flex;
-         flex-direction: column;
-         align-items: stretch;
-         width: 100%;
-         max-width: 400px;
-         background: var(--card-bg);
-         /* allow the card to grow to fit its content instead of forcing a fixed height */
-         height: 100%;
-         min-height: 0;
-         border-radius: var(--card-radius);
-         padding: 1rem;
-         position: relative;
-         text-align: center;
-         transition: transform 0.2s ease, box-shadow 0.2s ease;
-         overflow: visible;
-         cursor: pointer;
-         }
-         .scale {
-         transition: 0.6s ease;
-         }
-         .scale:hover {
-         transform: translateY(-6px) scale(1.02);
-         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-         }
-         .card a.card-link {
-         color: inherit;
-         text-decoration: none;
-         /* keep content stacked vertically, but don't force link to stretch and cause overlap */
-         display: flex;
-         flex-direction: column;
-         gap: 0.5rem;
-         align-items: stretch;
-         }
-         .card h2 {
-         margin: 8px 0;
-         font-size: clamp(18px, 2.4vw, 28px);
-         }
-         .contactBottom{
-           justify-content: center;
-           text-align: center;
-          }
-          .contact-grid{
-           display: flex;
-          justify-content: center;
-          gap: 4vw;
-          margin: 4vw;
-         }
-         /* stack contact cards on narrow viewports while keeping center alignment */
-
-         /* pointer behavior: don't show pointer for the whole contact card — only for links */
-         .contactCard {
-         width: 100%;
-         cursor: default;
-         background: var(--card-bg);
-         /* ensure no pointer on the card itself */
-         }
-         .contactBottom a,
-         .contactBottom a:link,
-         .contactBottom a:visited {
-         cursor: pointer;
-         /* show pointer only when over actual links */
-         }
-         /* Hover media container */
-         .hover {
-         position: relative;
-         width: 100%;
-         aspect-ratio: 16 / 9;
-         border-radius: calc(var(--card-radius) - 2px);
-         overflow: hidden;
-         display: block;
-         background: linear-gradient(180deg, #111, #222);
-         }
-         .hover img,
-         .hover video {
-         position: absolute;
-         inset: 0;
-         width: 100%;
-         height: 100%;
-         object-fit: cover;
-         display: block;
-         }
-         .hover img {
-         transition: opacity 0.45s ease;
-         }
-         .hover video {
-         opacity: 0;
-         transition: opacity 0.45s ease;
-         pointer-events: none;
-         }
-         /* make the whole card trigger the media swap/play */
-         .card:hover .hover img,
-         .card:focus-within .hover img {
-         opacity: 0;
-         }
-         .card:hover .hover video,
-         .card:focus-within .hover video {
-         opacity: 1;
-         }
-         /* Text */
-         .card p {
-         font-size: clamp(12px, 1.8vw, 14px);
-         line-height: 1.4;
-         height: auto;
-         margin: 12px 0;
-         margin-bottom: 4em;
-         color: var(--muted);
-         white-space: normal;
-         word-break: break-word;
-         flex: 0 0 auto;
-         }
-         /* Call to action styled as button */
-         .cta {
-         display: inline-block;
-         background: var(--accent1);
-         color: #000;
-         padding: 0.5rem 1rem;
-         border-radius: 6px;
-         text-decoration: none;
-         font-weight: 600;
-         margin-top: 12px;
-         align-self: center;
-         position: absolute;
-         bottom:20px;
-         /* keep the button below the paragraph and centered */
-         }
-         .cta:active {
-         transform: translateY(1px);
-         }
-         /* Neon border effect (background blur) */
-         .card::before,
-         .card::after {
-         content: "";
-         position: absolute;
-         inset: -6px;
-         border-radius: calc(var(--card-radius) + 6px);
-         z-index: -1;
-         background-image: conic-gradient(from var(--angle),
-         var(--accent1),
-         var(--accent2),
-         var(--accent1));
-         padding: 3px;
-         transform: translateZ(0);
-         animation: spin 2s linear infinite;
-         }
-         .card::before {
-         filter: blur(40px);
-         opacity: 0.5;
-         }
-         .card::after {
-         mix-blend-mode: screen;
-         }
-         .intro {
-            text-align: center;
-         transform: translateY(100px);
-         margin-right: 30px;
-         margin-left: 30px;
-         margin-bottom: 250px;
-         font-size: 25px;
-         }
-         .introWrapper{
-            display: flex;
-            justify-content: center;
-         }
-         .intro h1 {
-         color: rgb(149, 225, 255);
-         }
-         .intro h2 {
-         margin: -10px 0 20px 0;
-         }
-         .skills-wrapper {
-         width: 100%;
-         max-width: 1200px;
-         /* matches .projects max-width */
-         margin: 24px auto;
-         margin-bottom: clamp(100px, 15vw, 300px);
-         padding: 0 16px;
-         box-sizing: border-box;
-         }
-         .skills-row {
-         display: flex;
-         gap: 20px;
-         flex-wrap: wrap;
-         justify-content: center;
-         /* centers the row inside the wrapper */
-         align-items: center;
-         }
-         /* each skill is a pill whose width depends on its text length */
-         .skill-pill {
-         display: inline-block;
-         white-space: nowrap;
-         padding: 0.45rem 0.9rem;
-         border-radius: 8px;
-         background: var(--card-bg);
-         color: var(--muted);
-         border: 1px solid rgba(255, 255, 255, 0.04);
-         font-weight: 600;
-         font-size: clamp(25px, 1.2vw, 30px);
-         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-         cursor: default;
-         }
-         
-         /* keep the same responsive behavior for very small screens */
-
-    @property --angle {
-      syntax: "<angle>";
-      initial-value: 0deg;
-      inherits: false;
-    }
-         @keyframes spin {
-         from {
-         --angle: 0deg;
-         }
-         to {
-         --angle: 360deg;
-         }
-         }
-
-         /* Small screens */
-
-         /* Fix for very large screens */
-
-         .home-button {
-         padding: 10px 20px;
-         position: absolute;
-         top: 20px;
-         left: 20px;
-         background: white;
-         border: none;
-         color: #121212;
-         font-size: 1.5rem;
-         cursor: pointer;
-         border-radius: 8px;
-         }
-         .site-header {
-         border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-         background-color: transparent;
-         position: fixed;
-         /* remain visible after scroll */
-         backdrop-filter: blur(6px);
-         top: 0;
-         left: 0;
-         width: 100%;
-         z-index: 8000;
-         overflow: visible;
-         --site-header-height: 100px;
-         padding-bottom: 100px;
-         }
-         
-
-
-         
-         .nav {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         display: flex;
-         justify-content: space-between; /* left icons + right hamburger */
-         align-items: center;
-         padding: 1rem 2rem;
-         z-index: 1000;
-         /* allow absolutely-positioned hamburger inside and keep links centered */
-         }
-         .nav-links a,
-         .nav-links a:link,
-         .nav-links a:visited {
-         color: var(--muted);
-         /* force theme color for all nav links */
-         text-decoration: none;
-         }
-         .nav-links a .my-icons,
-         .nav-links .my-icons {
-         color: inherit;
-         /* ensure font-awesome icons inherit the anchor color */
-         }
-         .navSide.open {
-         left: -220px;
-         }
-         .intro p strong {
-         color: #71bcd3;
-         }
-         .my-icons {
-         font-size: clamp(24px, 5vw, 50px);
-         }
-         .leftIcons{
-         display: flex;
-         gap: clamp(1em, 5vw, 4em);
-         size-adjust: none;
-         position: fixed;
-         top: 20px;
-         left: 50px;
-             z-index: 1200;       /* above header/topnav overlays */
-    pointer-events: auto;
-         }
-         .headerIcon{
-         color: white;
-         font-size: 60px;
-
-        }
-        .rightIcon{
-         position: fixed;
-         top: 30px;
-         right: 50px;
-         }
-         .topnav {
-         position: fixed;
-         z-index: 2000;
-         overflow: hidden;
-         right:100px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         padding: 1rem 0;
-         z-index: 1000;
-         top: 0;
-         left: 0;
-         right: 0;
-         box-sizing: border-box;
-        }
-         .topnav a{
-           display: block;
-           color: #e7e7e7;
-         text-align: center;
-         padding: 14px 16px;
-         text-decoration: none;
-         font-size: 17px;
-         }
-         .topnav.icon {
-         color: #e7e7e7;
-         font-size: 50px;
-         display: none;
-        }
-
-         .fa{
-           display: none;
-                    position: fixed;
-                  top: 20px;
-         right: 50px;
-          }
-         @media (min-width: 1400px) {
-         .projects,
-         .intro h1,
-         .intro h2,
-         .intro p,
-         .contact {
-         max-width: 1400px;
-        }
-      }
-      @media screen and (max-width: 1200px) {
-       .fa{
-         display: initial;
-       }
-      .topnav a {display: none;}
-      .topnav.icon {
-      float: right;
-      display: block;
-      }
-      .leftIcons{
-      display: default;
-      }
-      .topIcons{
-      display: flex;
-      }
-      .topnav.responsive{
-      position: fixed;
-      top: calc(var(--site-header-height,1000px));
-      left: 0;
-      width: 100%;
-      display: block;
-      z-index: 999; /* below header but above page content */
-      background: rgba(10,10,12,0.95); /* optional theme-matching bg */
-      box-sizing: border-box;
-      padding: 8px 12px;
-      }
-      .topnav.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
-      }
-      }
-
-      .site-footer{
-         color: white;
-        text-align: center;
-        width: 100%;
-        border-top: solid rgba(0, 183, 255, 0.171) 1px;
-        padding: 30px;
-      }
-      
-      @media (max-width: 900px) {
-        .contact-grid {
-           flex-direction: column;
-          }
-        }
-
-          @media (max-width: 720px) {
-         .topRow, .bottomRow {
-         flex-direction: column;
-         justify-content: center;
-         }
-        }
-
-         @media (max-width: 480px) {
-         .skills-wrapper {
-         padding: 0 10px;
-         }
-         .projects {
-         padding: 12px 10px;
-         }
-         .card {
-         padding: 0.75rem;
-         }
-         .card p {
-         font-size: 13px;
-         max-height: 5.3em;
-         }
-         }
-
-
-         @media screen and (max-width: 380px) {
-          .headerIcon{
-            font-size: 15vw;
-          }
-          .fa{
-            position: static;
-          }
-.rightIcon{
-  display: initial;
-  position: static;
-  color: red;
-}
-.topIcons {
-  display: flex;
-  gap: 5vw;
-  justify-content: center;
-  position: fixed;
-  top: 30px;
-  left: 50px;
-}
-         .leftIcons {
-  display: flex;
-  gap: 5vw;
-  position: static;
-}
-         }
-         
-      </style>
+      <link rel="stylesheet" href="cssFiles/Style.css" />
+      <script src="jsFiles/Script.js"></script>
    </head>
    <body>
       <header class="site-header">
@@ -568,7 +31,7 @@
                </div>
             </div>
             <div class="topnav" id="myTopnav">
-               <a href="#intro" id="navSide intro" class="navSideIntro">About Me</a>
+               <a href="#intro" id="navSide intro">About Me</a>
                <a href="#projects" id="navSide projects">Projects</a>
                <a href="#skills" id="navSide skills">Skills</a>
                <a href="#contact" id="navSide contact">Links & Info</a>
@@ -603,12 +66,12 @@
             <!-- Card 1 -->
             <div class="scale">
                <article class="card">
-                  <a class="card-link" href="KillerJournalist.html" aria-label="Killer Journalist on itch.io">
+                  <a class="card-link" href="AddedPages/KillerJournalist.html" aria-label="Killer Journalist on itch.io">
                      <h2>Killer Journalist</h2>
                      <div class="hover" tabindex="0">
                         <img src="https://img.itch.zone/aW1hZ2UvMzk4OTc3Ny8yMzc5NjUwNC5wbmc=/original/G1jljx.png"
                            alt="Killer Journalist screenshot" />
-                        <video src="Killer Journalist - OfficialTrailer VFinal.mp4" preload="metadata" muted loop
+                        <video src="GameTrailers/Killer Journalist - OfficialTrailer VFinal.mp4" preload="metadata" muted loop
                            playsinline></video>
                      </div>
                      <p>
@@ -625,12 +88,12 @@
             <!-- Card 2 -->
             <div class="scale">
                <article class="card">
-                  <a class="card-link" href="SelfReflection.html" aria-label="Self Reflection on itch.io">
+                  <a class="card-link" href="AddedPages/SelfReflection.html" aria-label="Self Reflection on itch.io">
                      <h2>Self Reflection</h2>
                      <div class="hover" tabindex="0">
                         <img src="https://img.itch.zone/aW1nLzIwNzI3MzgxLnBuZw==/original/zTkThk.png"
                            alt="Self Reflection screenshot" />
-                        <video src="SelfReflection.mp4" preload="metadata" muted loop playsinline></video>
+                        <video src="GameTrailers/SelfReflection.mp4" preload="metadata" muted loop playsinline></video>
                      </div>
                      <p>
                         3rd Place Winner for the 2025 Behaviour Interactive Game Jam
@@ -645,12 +108,12 @@
             <!-- Card 3 -->
             <div class="scale">
                <article class="card">
-                  <a class="card-link" href="ScatteredTime.html" aria-label="Scattered Time on itch.io">
+                  <a class="card-link" href="AddedPages/ScatteredTime.html" aria-label="Scattered Time on itch.io">
                      <h2>Scattered Time</h2>
                      <div class="hover" tabindex="0">
                         <img src="https://img.itch.zone/aW1nLzIwOTgwNjQxLnBuZw==/original/qeatR0.png"
                            alt="Scattered Time screenshot" />
-                        <video src="ScatteredTime.mp4" preload="metadata" muted loop playsinline></video>
+                        <video src="GameTrailers/ScatteredTime.mp4" preload="metadata" muted loop playsinline></video>
                      </div>
                      <p>
                         3rd Place Winner for the 2025 Lasalle College Game Jam
@@ -667,12 +130,12 @@
             <!-- Card 4 -->
             <div class="scale">
                <article class="card">
-                  <a class="card-link" href="StemsFromNothing.html" aria-label="Stems From Nothing on itch.io">
+                  <a class="card-link" href="AddedPages/StemsFromNothing.html" aria-label="Stems From Nothing on itch.io">
                      <h2>Stems From Nothing</h2>
                      <div class="hover" tabindex="0">
                         <img src="https://img.itch.zone/aW1nLzIzMjYyOTQ3LnBuZw==/original/2XA1B6.png"
                            alt="Stems From Nothing screenshot" />
-                        <video src="StemsFromNothing.mp4" preload="metadata" muted loop playsinline></video>
+                        <video src="GameTrailers/StemsFromNothing.mp4" preload="metadata" muted loop playsinline></video>
                      </div>
                      <p>
                         Music-Building game created for the 2025 NAD Creative Jam
@@ -687,12 +150,12 @@
             <!-- Card 5 -->
             <div class="scale">
                <article class="card">
-                  <a class="card-link" href="EatLeaf.html" aria-label="Eat Leaf on itch.io">
+                  <a class="card-link" href="AddedPages/EatLeaf.html" aria-label="Eat Leaf on itch.io">
                      <h2>Eat Leaf</h2>
                      <div class="hover" tabindex="0">
                         <img src="https://img.itch.zone/aW1nLzE1NjI3ODE4LnBuZw==/105x83%23/GD901u.png"
                            alt="Eat Leaf screenshot" />
-                        <video src="EatLeafPreview.mp4" preload="metadata" muted loop playsinline></video>
+                        <video src="GameTrailers/EatLeafPreview.mp4" preload="metadata" muted loop playsinline></video>
                      </div>
                      <p>
                         Solo Project made in 2 months as a first, self-taught project
@@ -708,7 +171,6 @@
          </div>
       </div>
       </div>
-      <!-- skills area: spans/caps to the same width as the projects section -->
       <h1 id="skills" class="skills" style="
          text-decoration: underline;
          text-align: center;
@@ -739,27 +201,27 @@
       <div id="contact" class="contactBottom" style="padding-bottom: 150px;">
          <h1 style="text-decoration: underline">Links & Info</h1>
          <div class="contact-grid">
-            <article class="contactCard project-card reveal" style="
+            <article class="contactCard project-card reveal scale" style="
                border: 5px solid rgb(0, 183, 255);
                box-shadow: 0 6px 25px rgb(0, 183, 255);
                ">
-               <div class="card-body">
-                  <h3 class="email" style="color: white">
+               <div>
+                  <h3 style="color: white">
                      <i class="fa-solid fa-envelope"></i> Email
                   </h3>
                   <p>
-                     <a style="color: rgb(149, 225, 255)" href="mailto:Cole.e.Johnston16@gmail.com" class="email" target="_blank"
+                     <a style="color: rgb(149, 225, 255)" href="mailto:Cole.e.Johnston16@gmail.com" target="_blank"
                         title="Email">Cole.e.Johnston16@gmail.com
                      </a>
                   </p>
                </div>
             </article>
-            <article class="contactCard project-card reveal" style="
+            <article class="contactCard project-card reveal scale" style="
                border: 5px solid rgb(90, 0, 102);
                box-shadow: 0 6px 25px rgb(90, 0, 102);
                ">
-               <div class="card-body">
-                  <h3 class="linkedIn">
+               <div>
+                  <h3>
                      <i class="fa-brands fa-linkedin"></i> Let's Connect!
                   </h3>
                   <p>
@@ -768,16 +230,16 @@
                   </p>
                </div>
             </article>
-            <article class="contactCard project-card reveal" style="
+            <article class="contactCard project-card reveal scale" style="
                border: 5px solid rgb(0, 183, 255);
                box-shadow: 0 6px 25px rgb(0, 183, 255);
                ">
-               <div class="card-body">
-                  <h3 class="email" style="color: white">
+               <div>
+                  <h3 style="color: white">
                      <i class="fa-solid fa-sheet-plastic"></i> Resume
                   </h3>
                   <p>
-                     <a style="color: rgb(149, 225, 255)" href="ColeJohnstonCV.pdf" download>Download pdf</a>
+                     <a style="color: rgb(149, 225, 255)" href="CV/ColeJohnstonCV.pdf" download>Download pdf</a>
                   </p>
                </div>
             </article>
@@ -786,92 +248,45 @@
           <footer class="site-footer">
         <small>© <span id="year"></span> 2025 Cole Johnston</small>
     </footer>
-      <script>
-         // Play/pause the video when hovering or focusing the parent .card
-         document.querySelectorAll(".card").forEach((card) => {
-           const video = card.querySelector(".hover video");
-           if (!video) return;
-         
-           card.addEventListener("pointerenter", () => {
-             video.currentTime = 0;
-             const p = video.play();
-             if (p && p.catch) p.catch(() => {});
-           });
-           card.addEventListener("pointerleave", () => {
-             video.pause();
-             video.currentTime = 0;
-           });
-         
-           // keyboard accessibility: focusing any element inside the card triggers playback
-           card.addEventListener("focusin", () => {
-             const p = video.play();
-             if (p && p.catch) p.catch(() => {});
-           });
-           card.addEventListener("focusout", () => {
-             video.pause();
-             video.currentTime = 0;
-           });
-         });
-         
-         // Make clicking anywhere inside a .card navigate to its primary .card-link,
-         // but allow native clicks on anchors/buttons/inputs to work normally
-         document.querySelectorAll(".card").forEach((card) => {
-           const link = card.querySelector(".card-link");
-           if (!link) return;
-         
-           card.addEventListener("click", (e) => {
-             // only trigger navigation if the click wasn't on a nested interactive element
-             if (
-               e.target.tagName !== "A" &&
-               !["BUTTON", "INPUT"].includes(e.target.tagName)
-             ) {
-               e.preventDefault();
-               link.click();
-             }
-           });
-         });
-      </script>
-      <script>
-         { /* replaced script block to set default open/closed based on viewport */ }
-         
-         const burger = document.getElementById("hamburgerBtn");
-         const nav = document.getElementById("navSide");
-         
-         // breakpoint for "mobile" (matches your existing CSS breakpoint usage)
-         const mobileMQ = window.matchMedia("(max-width: 720px)");
-         
-         // Apply default: mobile -> closed, otherwise -> open.
-         // NOTE: in your CSS the .navSide.open class moves the panel off-canvas,
-         // so "closed" = add('open'), "open" = remove('open').
-         function applyNavDefault(e) {
-           const isMobile = e.matches === undefined ? mobileMQ.matches : e.matches;
-           if (isMobile) {
-             nav.classList.add("open");    // mobile: closed by default
-           } else {
-             nav.classList.remove("open"); // desktop/tablet: open by default
-           }
-         }
-         
-         // initial set
-         applyNavDefault(mobileMQ);
-         
-         // keep defaults in sync if viewport changes
-         if (typeof mobileMQ.addEventListener === "function") {
-           mobileMQ.addEventListener("change", applyNavDefault);
-         } else if (typeof mobileMQ.addListener === "function") {
-           mobileMQ.addListener(applyNavDefault);
-         }
-         
-         // hamburger toggles the state as before
-         burger.addEventListener("click", () => {
-           nav.classList.toggle("open");
-         });
-         
-         { /* ...existing video / card scripts follow unchanged ... */ }
-         // ...existing code...
-      </script>
-      <script>
-         function getDocumentTop(element) {
+   </body>
+</html>
+
+    <script>
+
+// Play/pause the video when hovering or focusing the parent .card
+document.querySelectorAll(".card").forEach((card) =>
+{
+    const video = card.querySelector(".hover video");
+    if (!video) return;
+
+    card.addEventListener("pointerenter", () =>
+    {
+        video.currentTime = 0;
+        const p = video.play();
+        if (p && p.catch) p.catch(() =>
+        {});
+    });
+    card.addEventListener("pointerleave", () =>
+    {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    // keyboard accessibility: focusing any element inside the card triggers playback
+    card.addEventListener("focusin", () =>
+    {
+        const p = video.play();
+        if (p && p.catch) p.catch(() =>
+        {});
+    });
+    card.addEventListener("focusout", () =>
+    {
+        video.pause();
+        video.currentTime = 0;
+    });
+});
+
+               function getDocumentTop(element) {
            let el = document.getElementById(element);
            let top = 0;
            while (el) {
@@ -935,17 +350,4 @@
            }
            
          });
-         
-      </script>
-      <script>
-         function myFunction() {
-           var x = document.getElementById("myTopnav");
-           if (x.className === "topnav" || x.className === "topnavIcon") {
-             x.className += " responsive";
-           } else {
-             x.className = "topnav";
-           }
-         }
-      </script>
-   </body>
-</html>
+    </script>
