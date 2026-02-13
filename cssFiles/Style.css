@@ -224,7 +224,7 @@ h1.page-title {
 
 /* top row of 3 projects */
 .topRow {
-    display: flex;
+    display: grid;
     gap: 5vw;
     grid-template-columns: repeat(3, minmax(100px, 1fr));
     justify-content: center;
@@ -391,9 +391,9 @@ h1.page-title {
 /* bottom row of 2 projects */
 .bottomRow {
     margin-top: 5vw;
-    display: flex;
+    display: grid;
     gap: 5vw;
-    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
     justify-content: center;
     justify-items: center;
     align-items: stretch;
@@ -537,6 +537,7 @@ h1.page-title {
 
     .topRow,
     .bottomRow {
+        display: flex;
         flex-direction: column;
         justify-content: center;
     }
