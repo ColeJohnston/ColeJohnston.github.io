@@ -115,10 +115,11 @@ body {
     position: relative;
     border-radius: 12px;
     flex: 1;
-    padding-left: 40px;
+    padding: 0px 40px;
     padding-top: 20px;
     padding-bottom: 40px;
     margin-top: 20px;
+    text-align: justify;
 }
 
 .info-icon {
@@ -132,14 +133,16 @@ li {
     margin-right: 50px;
     margin-bottom: 25px;
 }
-      .site-footer{
-         color: white;
-        text-align: center;
-        width: 100%;
-        border-top: solid rgba(0, 183, 255, 0.171) 1px;
-        padding: 30px 0px;
-        margin-top: 100px;
-      }
-               strong {
-         color: #00c3ff;
-         }
+
+.site-footer {
+    color: white;
+    text-align: center;
+    width: 100%;
+    border-top: solid rgba(0, 183, 255, 0.171) 1px;
+    padding: 30px 0px;
+    margin-top: 100px;
+}
+
+strong {
+    color: #00c3ff;
+}
