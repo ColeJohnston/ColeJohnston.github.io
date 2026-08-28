@@ -150,7 +150,7 @@
       @media (max-width: 900px) {
         .carousel {
           width: 85vw;
-          height: 70vh;
+          height: auto;
         }
         .ImageContainer {
           display: flex;
@@ -175,7 +175,7 @@
         }
         .carousel {
           width: 92vw;
-          height: 75vh;
+          height: auto;
         }
         .item {
           border-radius: 18px;
@@ -226,7 +226,7 @@
       @media (max-width: 400px) {
         .carousel {
           width: 95vw;
-          height: 78vh;
+          height: auto;
         }
         .item {
           border-radius: 14px;
@@ -382,9 +382,18 @@
       {
         type: "generic",
         title: "Player immersion",
-        src: "../Echo1Videos/SideTilt.gif",
+        src: "../Echo1Videos/SpeedLines.gif",
         description: `
         <li>Implemented velocity-driven FOV linear interpolation (90°–110°) alongside a particle-based speed line effect, with both intensity and particle speed mapped to the boat's velocity, to reinforce the player's sense of speed.</li>
+      `,
+      },
+      {
+        type: "generic",
+        title: "Respawn",
+        src: "../Echo1Videos/Respawn.gif",
+        description: `
+        <li>Designed and programmed a respawn mechanic in which the players position is incrementally recorded throughout their gameplay to mark points where they were safe to rewind back to in the case that they beach the boat</li>
+        <li>Collisions are also paired with the boat flashing red to indicate further to the player not only that they took damage, but also the invulnerability period that prevents the player taking back-to-back damage.</li>
       `,
       },
       {
@@ -392,7 +401,7 @@
         title: "Tutorial Path",
         src: "../Echo1Videos/TutorialPath.gif",
         description: `
-        <li>During playtesting, I found players — myself included — often got disoriented, unsure where to go next or where they'd already been. Designed and implemented a VFX trail running through the level to visually guide players through the tutorial.</li>
+        <li>During playtesting, I found players often got disoriented, unsure where to go next or where they'd already been. Designed and implemented a VFX trail running through the level to visually guide players through the tutorial.</li>
         <li>This trail is reusable and dynamic including settings like speed, guide frequency, and path.</li>
         `,
       },
