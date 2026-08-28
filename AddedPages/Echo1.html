@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../cssFiles/GamePages.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Echo-1</title>
+    <link rel="icon" type="image/png" href="../Echo1Videos/Splash.png" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: #fff;
+        overflow-x: hidden;
+      }
+      .projects-main-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .carousel {
+        position: relative;
+        width: min(70vw, 1100px);
+        height: min(70vh, 750px);
+        height: auto;
+        margin: 0 auto;
+        padding: 0;
+      }
+      .item {
+        outline: 2px solid rgb(0, 183, 255);
+        border-radius: 30px;
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: clamp(10px, 2vw, 24px);
+        margin: 0;
+        margin-bottom: 50px;
+        filter: drop-shadow(0 2px 2px #555);
+        will-change: transform, opacity;
+        transition:
+          translate 0.5s ease,
+          scale 0.5s ease,
+          opacity 0.5s ease,
+          visibility 0.5s;
+      }
+      .item-body {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        min-width: 0;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+      }
+      .title {
+        text-transform: uppercase;
+        font-size: clamp(22px, 3vw, 40px);
+        font-weight: bold;
+        text-align: center;
+        margin: clamp(8px, 1.5vw, 16px);
+      }
+      .ImageContainer {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        min-width: 0;
+        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+        align-items: center;
+        font-size: clamp(14px, 1.5vw, 20px);
+        overflow: hidden;
+      }
+      .ImageContainer > img {
+        width: 90%;
+        height: 90%;
+        max-width: 100%;
+        max-height: 100%;
+        min-width: 0;
+        min-height: 0;
+        object-fit: contain;
+        justify-self: center;
+      }
+      .ImageContainersplit {
+        width: 90%;
+        height: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+      }
+      .ImageContainersplit img {
+        width: 100%;
+        height: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        min-width: 0;
+        min-height: 0;
+        object-fit: contain;
+      }
+      .description {
+        color: #fff;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 0;
+        padding-right: 10px;
+        overflow-y: auto;
+      }
+      .description ul,
+      .ImageContainer ul {
+        max-width: 100%;
+      }
+      .intro-contents {
+        display: flex;
+        flex-direction: column;
+      }
+      .ImageContainer .video,
+      #main-video {
+        width: 90%;
+        height: 90%;
+        max-width: 100%;
+        max-height: 100%;
+        min-width: 0;
+        min-height: 0;
+        object-fit: contain;
+        justify-self: center;
+      }
+      /* =========================
+   TABLETS
+   ========================= */
+      @media (max-width: 900px) {
+        .carousel {
+          width: 85vw;
+          height: 70vh;
+        }
+        .ImageContainer {
+          display: flex;
+          flex-direction: column;
+          grid-template-columns: 50% 50%;
+        }
+        .ImageContainer > img {
+          width: 95%;
+          height: 85%;
+        }
+        .ImageContainersplit {
+          width: 95%;
+          flex-direction: row;
+        }
+      }
+      /* =========================
+   PHONES
+   ========================= */
+      @media (max-width: 600px) {
+        .projects-main-container {
+          padding: 0 10px;
+        }
+        .carousel {
+          width: 92vw;
+          height: 75vh;
+        }
+        .item {
+          border-radius: 18px;
+          padding: 8px;
+        }
+        .title {
+          font-size: clamp(20px, 7vw, 30px);
+          margin: 6px;
+        }
+        /*
+    Stack the image and description vertically
+    instead of trying to fit them side-by-side.
+  */
+        .ImageContainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          overflow-y: auto;
+        }
+        .ImageContainer > img {
+          width: 80%;
+          height: 45%;
+          flex-shrink: 0;
+        }
+        .ImageContainersplit {
+          width: 90%;
+          height: 50%;
+          flex-shrink: 0;
+        }
+        .ImageContainersplit img {
+          width: 100%;
+          height: 50%;
+        }
+        .ImageContainer ul {
+          width: 90%;
+          margin: 5px auto;
+          font-size: 14px;
+          line-height: 1.4;
+          overflow-y: auto;
+        }
+      }
+
+      /* =========================
+   VERY SMALL PHONES
+   ========================= */
+      @media (max-width: 400px) {
+        .carousel {
+          width: 95vw;
+          height: 78vh;
+        }
+        .item {
+          border-radius: 14px;
+        }
+        .title {
+          font-size: 21px;
+        }
+        .ImageContainer > img {
+          width: 75%;
+          height: 40%;
+        }
+        .ImageContainer ul {
+          font-size: 13px;
+        }
+      }
+      .video {
+        object-fit: contain;
+      }
+
+      /* Scoped fix for the "home" item's raw <main> structure */
+      .item main {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
+
+      .item main .projects-main-container {
+        width: 100%;
+        padding: 0;
+        flex-shrink: 0;
+      }
+
+      .item main #main-video {
+        width: 100%;
+        height: auto;
+        max-height: 45vh; /* keeps video from dominating the box */
+        min-width: 0;
+        min-height: 0;
+        object-fit: contain;
+        display: block;
+        border-radius: 8px;
+      }
+
+      .item main h2,
+      .item main p {
+        padding: 0 10px;
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <button class="home-button" onclick="location.href = '../index.html'">
+        <i class="fa-solid fa-house"></i>
+      </button>
+      <div class="projects-main-container">
+        <h2 class="video-title" style="margin-top: 50px" ;>Echo-1</h2>
+        <div class="carousel" id="carousel"></div>
+        <div class="playButton">
+          <a
+            href="https://store.steampowered.com/app/4191420/Echo1/"
+            target="_blank"
+          >
+            <button type="submit">Wishlist Now!</button>
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <small>© <span id="year"></span> 2025 Cole Johnston</small>
+    </footer>
+  </body>
+
+  <script>
+    const items = [
+      {
+        type: "home",
+      },
+      {
+        type: "generic",
+        title: "Minimap",
+        src: "../Echo1Videos/Minimap.gif",
+        description: `
+        <li>Used an orthographic camera to capture the area around the player and project it onto the HUD</li>
+        <li>Built a world-to-screen-space conversion system to position icons the minimap.</li>
+        <li>Designed a plug-and-play system for other developers that lets any actor be added to the minimap without modifying the minimap or the actor's own code.</li>
+        <li>Gave each actor instance independent minimap settings, including whether it disappears off-map or clings to the border and shrinks with distance.</li>
+        <li>Enabled per-instance icon customization, so any actor can have a unique minimap icon with no minimap-side setup required.</li>
+        `,
+      },
+      {
+        type: "generic",
+        title: "Buoy system",
+        src: "../Echo1Videos/BoueeRescue.gif",
+        description: `
+        <li>Built an interface so any actor can define how it interacts with the buoy system. When the buoy hits it and the buoy is recalled back to the boat.</li>
+        <li>Designed a physics-based curve for the buoy's flight path that can be sped up or slowed down without looking clunky, keeping the motion feeling natural at any pace.</li>
+        <li>Implemented an animated VFX trajectory trace that previews the buoy's predicted path before launch, giving players clear feedback on where it will land.</li>
+        <li>Built a rope system that dynamically sets its length to the buoy's throw distance, so the rope is tight exactly when the buoy reaches the end of its reach.</li>
+        `,
+      },
+      {
+        type: "generic",
+        title: "Quest Board",
+        src: "../Echo1Videos/QuestBoard.gif",
+        description: `
+        <li>Built a system for players to track the specifics for each of their active objectives.</li>
+        <li>Implemented urgency-based auto-sorting driven by each survivor's absolute time remaining (not percentage), ensuring the most time-critical survivors always surface at the top of the list. </li>
+        <li>Added directional arrows, distance, and time indicators to each quest widget, guiding players toward their next objective.</li>
+        <li>Created an animation for opening and closing the map as well as a notifier for if there is a new objective added while the board is closed.</li>
+      `,
+      },
+      {
+        type: "generic",
+        title: "Character Select",
+        src: "../Echo1Videos/CharacterCarousel.gif",
+        description: `
+        <li>Built a fully data-driven character select screen backed by a data table — adding a new playable character requires only filling out its entry in the data table, with no additional select-screen or character-code changes needed.</li>
+        <li>Synced the menu's hovered character to a live physical mesh in the scene by swapping skeletal meshes directly from the data asset, avoiding the overhead of spawning or destroying actors.</li>
+        <li>Added a smoke burst transition using particles to make character swaps feel more fluid and polished.</li>
+        `,
+      },
+      {
+        type: "split",
+        title: "Responsive tilt",
+        src: "../Echo1Videos/ForwardTilt.gif",
+        src2: "../Echo1Videos/SideTilt.gif",
+        description: `
+        <li>Implemented a boat tilt system using an animation timeline that linearly interpolates between rotation values based on the boat's current speed, replacing a previously static boat that felt unresponsive and unrealistic during acceleration, deceleration, and turning.</li>
+        `,
+      },
+      {
+        type: "generic",
+        title: "Ripples",
+        src: "../Echo1Videos/Ripples.gif",
+        description: `
+        <li>Identified that the plugin's built-in fluid simulation used the player's camera as its reference point, causing ripple position to visibly drift with camera rotation instead of staying locked to the boat; re-anchored the simulation's reference point to the boat itself, fixing the misalignment.</li>
+        <li>Found that the boat's mesh wasn't registering with the water simulation at all; traced the issue to a dynamic force component the fluid sim expected each interacting actor to carry, and attached one to the boat at its waterline contact point so it correctly registers as a ripple source.</li>
+      `,
+      },
+      {
+        type: "generic",
+        title: "Survivor Sequencing",
+        src: "../Echo1Videos/SurvivorSequence.gif",
+        description: `
+        <li>Replaced a single trigger-box-driven system (where all rescue missions began simultaneously) with a dedicated controller actor that launches each survivor individually, based on configurable order and timing.</li>
+        <li>Gave each survivor independent settings for rescue delay and personal timers, giving designers more control over pacing.</li>
+        `,
+      },
+      {
+        type: "generic",
+        title: "Player immersion",
+        src: "../Echo1Videos/SideTilt.gif",
+        description: `
+        <li>Implemented velocity-driven FOV linear interpolation (90°–110°) alongside a particle-based speed line effect, with both intensity and particle speed mapped to the boat's velocity, to reinforce the player's sense of speed.</li>
+      `,
+      },
+      {
+        type: "generic",
+        title: "Tutorial Path",
+        src: "../Echo1Videos/TutorialPath.gif",
+        description: `
+        <li>During playtesting, I found players — myself included — often got disoriented, unsure where to go next or where they'd already been. Designed and implemented a VFX trail running through the level to visually guide players through the tutorial.</li>
+        <li>This trail is reusable and dynamic including settings like speed, guide frequency, and path.</li>
+        `,
+      },
+      {
+        type: "generic",
+        title: "Compass",
+        src: "../Echo1Videos/Compass.gif",
+        description: `
+        <li>Built a compass system that calculates the direction from the world origin to a designer-placed "north" actor, derives the boat's rotational offset from that direction, and updates the compass needle accordingly</li>
+        `,
+      },
+    ];
+
+    const carousel = document.getElementById("carousel");
+    const N = items.length;
+    let current = 0;
+
+    const els = items.map((item) => {
+      const el = document.createElement("div");
+      el.classList.add("item");
+      if (item.type === "generic") {
+        el.innerHTML = `
+            <div class="item-body">
+                <p class="title">${item.title}</p>
+                <div class="ImageContainer">
+                <img src="${item.src}">
+                <ul>
+                ${item.description}
+                </ul>
+                </div>
+                </br>
+            </div>`;
+      } else if (item.type === "home") {
+        el.innerHTML = `
+            <main>
+      <div class="projects-main-container">
+        <p class="title">Game Trailer</p>
+        <video
+          id="main-video"
+          loop
+          autoplay
+          muted
+          src="../GameTrailers/Echo1.mp4"
+          type="video/mp4"
+        ></video>
+        </div>
+        <br />
+            <h2>Description</h2>
+            <p>
+Echo-1 is an educational adventure that 
+raises children's awareness of boating safety, 
+mutual support, and respect for marine ecosystems.
+You play as Echo, a small, courageous rescue boat,
+ accompanied by endearing mascots, in fun missions 
+ inspired by the real world: safe navigation, weather, 
+ reconnaissance, and protecting the river's wildlife and habitats.
+            </p>
+      </div>
+    </main>
+        `;
+      } else if (item.type === "split") {
+        el.innerHTML = `
+            <div class="item-body">
+                <p class="title">${item.title}</p>
+                <div class="ImageContainer">
+                  <div class="ImageContainersplit">
+                    <img src="${item.src}">
+                    <img src="${item.src2}">
+                  </div>
+                  <ul>
+                ${item.description}
+                </ul>
+                </div>
+                </br>
+            </div>`;
+      }
+      carousel.appendChild(el);
+      return el;
+    });
+
+    document.getElementById("next").addEventListener("click", () => {
+      current = (current + 1) % N;
+      updatePositions();
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+      current = (current - 1 + N) % N;
+      updatePositions();
+    });
+
+    updatePositions();
+  </script>
+</html>

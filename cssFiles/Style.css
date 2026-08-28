@@ -230,6 +230,7 @@ h1.page-title {
     justify-content: center;
     justify-items: center;
     align-items: stretch;
+    margin-top: 5vw;
 }
 
 /* size of each project card */
@@ -295,6 +296,22 @@ h1.page-title {
 }
 
 /* card animation effect */
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: calc(var(--card-radius) + 6px);
+    z-index: -1;
+    background-image: conic-gradient(from var(--angle),
+            var(--accent1),
+            var(--accent2),
+            var(--accent1));
+    padding: 3px;
+    transform: translateZ(0);
+    animation: spin 2s linear infinite;
+}
+
 .card::before,
 .card::after {
     content: "";
